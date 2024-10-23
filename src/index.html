@@ -1,13 +1,27 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>AppCarrotechorg</title>
+  <title>Carro Tech | Aplicación para la gestión de pedidos de materiales y/o equipos</title>
   <base href="/">
+  <meta charset="utf-8" />
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="twitter:card" value="summary" />
+  <!-- <meta property="fb:app_id" content="647742856007228" /> -->
+  <meta property="og:url" content="https://carrotech.eiasa.com.co/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Carro Tech" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="assets/images/logue.png">
+  <link rel="apple-touch-icon" sizes="16x16" href="assets/images/logue.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
+
+<body class="mat-typography">
   <app-root></app-root>
 </body>
+
 </html>

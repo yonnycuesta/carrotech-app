@@ -1,0 +1,37 @@
+<div class="card-title">
+  <h1 mat-dialog-title>Actualizar La Cantidad del Componente</h1>
+</div>
+
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="itemForm" role="form">
+  <div class="main-content">
+
+  <div mat-dialog-content style="padding: 10px;">
+      <mat-form-field style="width: 100%; margin-bottom: 10px;">
+        <mat-label>Nombre</mat-label>
+        <input placeholder="Nombre" matInput formControlName="item_name">
+        <mat-error>
+          {{errors['item_name']}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field style="width: 100%; margin-bottom: 10px;">
+        <mat-label>Cantidad</mat-label>
+        <input placeholder="Cantidad" type="number" matInput formControlName="item_qty">
+        <mat-error>
+          {{errors['item_qty']}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field style="width: 100%; margin-bottom: 10px;">
+        <mat-label>Unidad</mat-label>
+        <input placeholder="Unidad" matInput formControlName="item_unit">
+        <mat-error>
+          {{errors['item_unit']}}
+        </mat-error>
+      </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions style="padding: 10px 20px; display: flex; justify-content: flex-end;">
+      <button class="dialog-btn" mat-raised-button type="button" (click)="closeDialog()">{{cancel}}</button>
+      <button class="dialog-btn" mat-raised-button color="primary" type="submit">Actualizar</button>
+  </div>
+</div>
+</form>

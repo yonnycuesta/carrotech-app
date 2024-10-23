@@ -1,0 +1,164 @@
+<ng-toast [position]="ToasterPosition.TOP_RIGHT" />
+
+<div class="example-action-buttons">
+  <div>
+    <button mat-raised-button (click)="accordion().openAll()">Expandir Todas</button>
+    <button mat-raised-button (click)="accordion().closeAll()">Contraer Todas</button>
+  </div>
+  <div>
+    <a mat-fab matTooltip="Agregar Orden" color="primary" routerLink="/order_create">
+      <mat-icon>add</mat-icon>
+    </a>
+  </div>
+</div>
+
+<mat-accordion class="example-headers-align" multi>
+
+  <div class="orders-container1">
+    @for (order of orders; track order.id) {
+    <mat-expansion-panel class="order-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Orden #{{ order.code }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ order.created_at | date:'short' }}
+          <span class="span-statu" [ngClass]="{
+            'header-abierta': order.statu_es === 'Abierta'
+          }">
+            {{ order.statu_es }}
+          </span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="order-details">
+        <div class="order-header">
+          <a mat-fab matTooltip="Agregar componentes" *ngIf="order.statu == 'openend'" color="primary"
+            routerLink="/order_items_add/{{order.code}}/{{order.id}}">
+            <mat-icon>add</mat-icon>
+          </a>
+        </div>
+
+        <mat-list>
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <mat-list-item>
+              <span matListItemTitle>Carro Bodega (Nombre):</span>
+              <span matListItemLine>{{ order.manager_name }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Carro Bodega (Celular):</span>
+              <span matListItemLine>{{ order.manager_phone }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Fecha de entrega:</span>
+              <span matListItemLine>{{ order.calendar.delivered_date | date }}</span>
+            </mat-list-item>
+          </div>
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <mat-list-item>
+              <span matListItemTitle>Hora de entrega:</span>
+              <span matListItemLine>{{ order.calendar.start_time }} - {{ order.calendar.end_time }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Sitio de despacho:</span>
+              <span matListItemLine>{{ order.delivered_opt }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Turno #:</span>
+              <span matListItemLine>{{ order.shift }}</span>
+            </mat-list-item>
+          </div>
+        </mat-list>
+        <mat-list>
+          <mat-list-item>
+            <span matListItemTitle>Comentario</span>
+            <span matListItemLine>{{ order.comment }}</span>
+          </mat-list-item>
+        </mat-list>
+
+        <h4 class="card-title">Componentes Solicitados</h4>
+
+        <mat-table [dataSource]="order.order_details" class="order-items-table">
+
+          <ng-container matColumnDef="item_code">
+            <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.item_code}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="item_name">
+            <mat-header-cell *matHeaderCellDef> Componente </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.item_name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="item_qty">
+            <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.item_qty}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="item_unit">
+            <mat-header-cell *matHeaderCellDef> Unidad </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.item_unit}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let item">
+              <button mat-icon-button color="primary" (click)="editItem(edit, item)" *ngIf="order.statu == 'openend'">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="removeItem(item.id)" *ngIf="order.statu == 'openend'">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <mat-header-row
+            *matHeaderRowDef="['item_code','item_name', 'item_qty', 'item_unit', 'actions']"></mat-header-row>
+          <mat-row
+            *matRowDef="let row; columns: ['item_code','item_name', 'item_qty', 'item_unit', 'actions'];"></mat-row>
+        </mat-table>
+      </div>
+
+      <div *ngIf="order.summaries.leght > 0">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            Componentes Rechazados
+          </mat-expansion-panel-header>
+
+          <ng-template matExpansionPanelContent>
+            <mat-table [dataSource]="order.summaries" class="order-items-table">
+              <ng-container matColumnDef="item_name">
+                <mat-header-cell *matHeaderCellDef> Componente </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.item_name}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="qty_requested">
+                <mat-header-cell *matHeaderCellDef> Cantidad Solicitada </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.qty_requested}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="qty_delivered">
+                <mat-header-cell *matHeaderCellDef> Cantidad Aprobada </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.qty_delivered}} </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="['item_name', 'qty_requested', 'qty_delivered']"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: ['item_name', 'qty_requested', 'qty_delivered'];"></mat-row>
+            </mat-table>
+          </ng-template>
+        </mat-expansion-panel>
+      </div>
+      <mat-action-row *ngIf="order.statu == 'openend' || order.statu == 'cancelled'">
+        <button mat-raised-button color="{{order.statu == 'openend' ? 'warn': 'primary'}}" matTooltip="Modificar estado"
+          (click)="cancel(order)">
+          <mat-icon>change_circle</mat-icon>
+          {{ order.statu == 'openend' ? 'Cancelar': 'Abrir'}}
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    }
+  </div>
+
+</mat-accordion>
+
+<app-progress [isLoading]="isLoading" />

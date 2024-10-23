@@ -1,0 +1,26 @@
+<div>
+  <h1 mat-dialog-title>Contactar a Soporte</h1>
+</div>
+
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="storeForm" role="form">
+
+  <div mat-dialog-content>
+    <div class="main-content">
+      <div class="input-form">
+        <mat-form-field>
+          <mat-label>Mensaje</mat-label>
+          <textarea placeholder="Ingrese el mensaje" rows="5" cols="20" matInput formControlName="message"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions style="float: right;">
+    <div>
+      <button class="dialog-btn" mat-raised-button type="button" (click)="closeDialog()">Cancelar</button>
+      <button class="dialog-btn" mat-raised-button color="primary" type="submit"
+        >Enviar</button>
+    </div>
+  </div>
+
+</form>

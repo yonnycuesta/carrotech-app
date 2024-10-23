@@ -1,0 +1,74 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>
+        <button mat-icon-button (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        {{ isEdit ? 'Editar' : 'Agregar' }} Carro
+      </mat-card-title>
+      <mat-card-subtitle>
+        Ingrese la información del carro que desea agregar
+      </mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="carForm" (ngSubmit)="onSave()" class="item-form">
+      <div class="example-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Carro Bodega</mat-label>
+          <mat-select formControlName="user_id" name="user_id" id="user_id" required>
+            <mat-option *ngFor="let user of staffes" [value]="user.id">
+              {{ user.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Placa</mat-label>
+          <input matInput formControlName="plate" name="plate" id="plate" required>
+        </mat-form-field>
+      </div>
+
+      <div class="example-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Modelo</mat-label>
+          <input matInput formControlName="model" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Marca</mat-label>
+          <input matInput type="text" formControlName="brand" required>
+        </mat-form-field>
+      </div>
+
+      <div class="example-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Color</mat-label>
+          <input matInput type="color" formControlName="color" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Capacidad</mat-label>
+          <input matInput type="number" formControlName="capacity" required>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Fecha de asignación</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="assigned_date">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-card-footer>
+        <div class="action-buttons">
+          <button mat-raised-button color="primary" type="submit" [disabled]="carForm.invalid">Guardar</button>
+          <button mat-raised-button color="warn">Cancelar</button>
+        </div>
+      </mat-card-footer>
+    </form>
+
+  </mat-card-content>
+</mat-card>

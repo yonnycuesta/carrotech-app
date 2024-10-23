@@ -1,0 +1,35 @@
+.add-items-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.item-form {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.mat-form-field {
+  flex: 1;
+}
+
+.items-table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.mat-column-actions {
+  width: 80px;
+  text-align: center;
+}
+
+.example-full-width {
+  width: 100%;
+}

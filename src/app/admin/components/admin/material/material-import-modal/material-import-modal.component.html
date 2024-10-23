@@ -1,0 +1,25 @@
+<div>
+  <h1 mat-dialog-title>Importar Materiales y Equipos</h1>
+</div>
+
+<form novalidate (ngSubmit)="onSubmit()" role="form">
+  <div mat-dialog-content>
+    <div class="main-content">
+      <div class="input-form">
+        <input type="file" (change)="onFileChange($event)" accept=".xlsx,.xls">
+      </div>
+      <div>
+        <p>Descargue la plantilla para importar los materiales y equipos</p>
+        <a href="assets/files/materiales_template.xlsx" download="materiales_template.xlsx">Descargar plantilla</a>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions style="float: right;">
+    <div>
+      <button class="dialog-btn" mat-raised-button type="button" (click)="closeDialog()">Cancelar</button>
+      <button class="dialog-btn" mat-raised-button color="primary" type="submit">Guardar</button>
+    </div>
+  </div>
+
+</form>

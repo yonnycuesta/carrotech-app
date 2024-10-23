@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+}
+
+.responsive-table {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.header-table {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-form-field {
+  width: 95%;
+}
+
+.import_btn{
+  margin: 3px;
+  display: flex;
+  justify-content: end;
+}

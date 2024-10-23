@@ -1,0 +1,81 @@
+<mat-form-field>
+  <mat-label>
+    Ingrese el parámetro de búsqueda...
+  </mat-label>
+  <input matInput (keyup)="applyFilter($event)" #input>
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z0" matSort>
+
+  <ng-container matColumnDef="code">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> # Código </th>
+    <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="manager_name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Carro Bodega (Nombre) </th>
+    <td mat-cell *matCellDef="let element"> {{element.manager_name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="manager_phone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Carro Bodega (Teléfono) </th>
+    <td mat-cell *matCellDef="let element"> {{element.manager_phone}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="staff_name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Técnico (Nombre) </th>
+    <td mat-cell *matCellDef="let element"> {{element.staff_name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="staff_phone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Técnico (Teléfono) </th>
+    <td mat-cell *matCellDef="let element"> {{element.staff_phone}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="statu">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+    <td mat-cell *matCellDef="let element"> {{element.statu}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="calendar">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha y Hora De Entrega </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.calendar.delivered_date | date }}<br>
+      {{ element.calendar.start_time }} - {{ element.calendar.end_time }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="comment">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Comentario </th>
+    <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="created_at">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de creación </th>
+    <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'medium'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let element">
+
+      <button mat-icon-button color="primary" (click)="orderDelete(element.id)" matTooltip="Eliminar">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="9">
+      No hay datos que mostrar
+      "{{input.value}}"</td>
+  </tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+</mat-paginator>

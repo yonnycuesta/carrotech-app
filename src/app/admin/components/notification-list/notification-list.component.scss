@@ -1,0 +1,48 @@
+.notification-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.notification-card {
+  margin-bottom: 16px;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+  }
+
+  &.unread {
+    border-left: 4px solid #3f51b5;
+  }
+}
+
+mat-card-header {
+  margin-bottom: 16px;
+}
+
+mat-card-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+mat-card-subtitle {
+  font-size: 14px;
+  color: rgba(0,0,0,.54);
+}
+
+mat-card-content {
+  font-size: 16px;
+  color: rgba(0,0,0,.87);
+  line-height: 1.5;
+}
+
+mat-card-actions {
+  padding: 8px 16px;
+}
+
+mat-icon {
+  font-size: 24px;
+  height: 24px;
+  width: 24px;
+}

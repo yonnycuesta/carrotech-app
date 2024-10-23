@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+}
+
+.swal2-title-custom {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.swal2-popup-custom {
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.responsive-table {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.header-table {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-form-field {
+  width: 95%;
+}

@@ -1,0 +1,88 @@
+<mat-card class="order-card">
+  <mat-card-header>
+    <button mat-icon-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <mat-card-title>Crear una Orden</mat-card-title>
+    <mat-card-subtitle>Ingrese los componentes para la orden</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+      <mat-expansion-panel [expanded]="panelOpenState">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Detalles de la Orden
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Carro Bodega</mat-label>
+          <mat-select [(ngModel)]="storage_manager_id" required>
+            <mat-option *ngFor="let manager of storageManagers" [value]="manager.id">
+              {{ manager.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Opción de entrega</mat-label>
+          <mat-select [(ngModel)]="delivered_opt" required>
+            <mat-option value="Sytex">Sytex</mat-option>
+            <mat-option value="SACC">SACC</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Comentario</mat-label>
+          <textarea matInput [(ngModel)]="comment" rows="2"></textarea>
+        </mat-form-field>
+      </mat-expansion-panel>
+
+      <form [formGroup]="itemForm" (ngSubmit)="addItem()">
+      <div class="new-item-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Ingresar nombre o código...</mat-label>
+          <input matInput formControlName="item_name" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+            <mat-option *ngFor="let option of optionMaterials | async" [value]="option">
+              {{option.code}} - {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cantidad requerida</mat-label>
+          <input matInput type="number" formControlName="item_qty" required>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" (click)="addItem()" [disabled]="itemForm.invalid">
+          Agregar
+        </button>
+      </div>
+    </form>
+
+      <mat-card class="items-card" *ngIf="(items$ | async) as items">
+        <mat-card-header>
+          <mat-card-title>Componentes de la orden</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item *ngFor="let item of items; let i = index">
+              <div mat-line class="item-name">{{item.item_name}}</div>
+              <div mat-line class="item-details">Código: {{item.item_code || 'N/A'}} | Cantidad: {{item.item_qty}}</div>
+              <button mat-icon-button color="warn" (click)="removeItem(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="action-buttons">
+        <button mat-raised-button color="primary" type="button" (click)="saveItems()">
+          Crear Orden
+        </button>
+        <button mat-raised-button color="warn" (click)="cancel()" type="button">Cancelar</button>
+      </div>
+  </mat-card-content>
+</mat-card>

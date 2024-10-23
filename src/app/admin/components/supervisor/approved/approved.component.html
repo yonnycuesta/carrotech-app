@@ -1,0 +1,126 @@
+<div class="example-action-buttons">
+  <div class="content">
+    <h4 class="title">
+      ORDENES PENDIENTE DE APROBACIÓN
+    </h4>
+  </div>
+  <div>
+    <button mat-raised-button (click)="accordion().openAll()">Expandir Todas</button>
+    <button mat-raised-button (click)="accordion().closeAll()">Contraer Todas</button>
+  </div>
+</div>
+
+<mat-accordion class="example-headers-align" multi>
+
+  <div class="orders-container1">
+    @for (order of orders; track order.id) {
+    <mat-expansion-panel class="order-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Orden #{{ order.code }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ order.user_name }} -
+          {{ order.created_at | date:'short' }}
+          <span class="span-statu" [ngClass]="{
+            'header-aprobada': order.statu === 'tobe_confirmed'
+          }">
+            {{ order.statu_es }}
+          </span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="order-details">
+        <div class="order-header">
+          <a mat-fab matTooltip="Agregar componentes" *ngIf="order.statu == 'openend'" color="primary"
+            routerLink="/order_items_add/{{order.code}}/{{order.id}}">
+            <mat-icon>add</mat-icon>
+          </a>
+        </div>
+
+        <mat-list>
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <mat-list-item>
+              <span matListItemTitle>Carro Bodega (Nombre):</span>
+              <span matListItemLine>{{ order.manager_name }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Carro Bodega (Celular):</span>
+              <span matListItemLine>{{ order.manager_phone }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Carro Bodega (Cédula):</span>
+              <span matListItemLine>{{ order.manager_phone }}</span>
+            </mat-list-item>
+          </div>
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <mat-list-item>
+              <span matListItemTitle>Nombre del técnico:</span>
+              <span matListItemLine>{{ order.user_name }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Celular del técnico:</span>
+              <span matListItemLine>{{ order.user_phone }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Cédula del técnico:</span>
+              <span matListItemLine>{{ order.user_dni }}</span>
+            </mat-list-item>
+          </div>
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <mat-list-item>
+              <span matListItemTitle>Sitio de despacho:</span>
+              <span matListItemLine>{{ order.delivered_opt }}</span>
+            </mat-list-item>
+          </div>
+        </mat-list>
+        <mat-list>
+          <mat-list-item>
+            <span matListItemTitle>Comentario</span>
+            <span matListItemLine>{{ order.comment }}</span>
+          </mat-list-item>
+        </mat-list>
+
+        <h4 class="card-title">Componentes Solicitados</h4>
+
+        <mat-table [dataSource]="order.details" class="order-items-table">
+
+          <ng-container matColumnDef="item_code">
+            <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.item_code}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="item_name">
+            <mat-header-cell *matHeaderCellDef> Componente </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.item_name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="item_qty">
+            <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.item_qty}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="item_unit">
+            <mat-header-cell *matHeaderCellDef> Unidad </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.item_unit}} </mat-cell>
+          </ng-container>
+
+
+          <mat-header-row *matHeaderRowDef="['item_code','item_name', 'item_qty', 'item_unit']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['item_code','item_name', 'item_qty', 'item_unit'];"></mat-row>
+        </mat-table>
+      </div>
+
+      <mat-action-row>
+        <button mat-raised-button color="primary" matTooltip="Modificar estado" (click)="updateStatu(order)">
+          <mat-icon>change_circle</mat-icon> Aprobar
+        </button>
+      </mat-action-row>
+
+    </mat-expansion-panel>
+    }
+  </div>
+
+</mat-accordion>
+
+<app-progress [isLoading]="isLoading" />

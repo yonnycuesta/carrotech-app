@@ -1,0 +1,17 @@
+.header,
+.dialog-message {
+  text-transform: lowercase;
+}
+
+.header::first-letter,
+.dialog-message::first-letter {
+  text-transform: uppercase;
+}
+
+.main-content {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}

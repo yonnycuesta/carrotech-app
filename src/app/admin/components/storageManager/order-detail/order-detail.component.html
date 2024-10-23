@@ -1,0 +1,122 @@
+<div class="orders-container">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>
+        <button mat-icon-button (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        Orden #{{ order.code }}</mat-card-title>
+    </mat-card-header>
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Información Adicional</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card-header>
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <div style="flex: 1; padding-right: 10px;">
+              <span matListItemTitle>Técnico (Nombre):</span>
+              <span matListItemLine>{{ order.staff_name }}</span>
+            </div>
+            <div style="flex: 1; padding-right: 10px;">
+              <span matListItemTitle>Técnico (cédula):</span>
+              <span matListItemLine>{{ order.staff_dni }}</span>
+            </div>
+            <div style="flex: 1;">
+              <span matListItemTitle>Técnico (celular):</span>
+              <span matListItemLine>{{ order.staff_phone}}</span>
+            </div>
+          </div>
+        </mat-card-header>
+        <mat-card-header>
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <div style="flex: 1;">
+              <span matListItemTitle>Fecha de entrega:</span>
+              <span matListItemLine>{{ order.calendar.delivered_date | date}}</span>
+            </div>
+            <div style="flex: 1;">
+              <span matListItemTitle>Hora de entrega:</span>
+              <span matListItemLine>{{ order.calendar.start_time }} - {{ order.calendar.end_time }}</span>
+            </div>
+          </div>
+        </mat-card-header>
+        <mat-card-header>
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <div style="flex: 1;">
+              <span matListItemTitle>Estado:</span>
+              <span matListItemLine>{{ order.statu }}</span>
+            </div>
+            <div style="flex: 1;">
+              <span matListItemTitle>Sitio de despacho:</span>
+              <span matListItemLine>{{ order.delivered_opt }}</span>
+            </div>
+          </div>
+        </mat-card-header>
+        <mat-card-header>
+          <div>
+            <span matListItemTitle>Comentario</span>
+            <span matListItemLine>{{ order.comment }}</span>
+          </div>
+        </mat-card-header>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-card-content>
+      <h4 class="card-title">Componentes Solicitados</h4>
+      <mat-table [dataSource]="order.order_details" class="order-items-table">
+
+        <ng-container matColumnDef="item_code">
+          <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.item_code}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="item_name">
+          <mat-header-cell *matHeaderCellDef> Componente </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.item_name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="item_qty">
+          <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.item_qty}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="item_unit">
+          <mat-header-cell *matHeaderCellDef> Unidad </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.item_unit}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </mat-card-content>
+    <mat-accordion *ngIf="order.summaries.length > 0">
+      <mat-expansion-panel (opened)="panelRejectedOpenState.set(true)" (closed)="panelRejectedOpenState.set(false)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Componentes Rechazados</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card-content>
+          <mat-table [dataSource]="order.summaries" class="order-items-table">
+            <ng-container matColumnDef="item_name">
+              <mat-header-cell *matHeaderCellDef> Componente </mat-header-cell>
+              <mat-cell *matCellDef="let item"> {{item.item_name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="item_qty">
+              <mat-header-cell *matHeaderCellDef> Cant. solicitada </mat-header-cell>
+              <mat-cell *matCellDef="let item"> {{item.qty_requested}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="qty_delivered">
+              <mat-header-cell *matHeaderCellDef> Cant. aprobada </mat-header-cell>
+              <mat-cell *matCellDef="let item"> {{item.qty_delivered}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedRejectedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedRejectedColumns;"></mat-row>
+          </mat-table>
+        </mat-card-content>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card>
+</div>

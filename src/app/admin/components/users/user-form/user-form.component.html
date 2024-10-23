@@ -1,0 +1,90 @@
+<div>
+  <h1 mat-dialog-title>{{action}} usuario</h1>
+</div>
+
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="tableForm" role="form">
+
+  <div mat-dialog-content>
+    <div class="main-content">
+      <div class="input-form">
+        <mat-form-field>
+          <mat-label>Nombre completo</mat-label>
+          <input placeholder="Nombre" matInput formControlName="name">
+          <mat-error>
+            {{errors['name']}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>N° cédula</mat-label>
+          <input placeholder="N° cédula" matInput formControlName="dni">
+          <mat-error>
+            {{errors['dni']}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="input-form">
+        <mat-form-field>
+          <mat-label>Correo electrónico</mat-label>
+          <input placeholder="Correo" matInput formControlName="email">
+          <mat-error>
+            {{errors['email']}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Celular</mat-label>
+          <input placeholder="Celular" matInput formControlName="phone">
+          <mat-error>
+            {{errors['phone']}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="input-form">
+        <mat-form-field>
+          <mat-label>Seleccionar Rol</mat-label>
+          <mat-select formControlName="role">
+            @for(role of roles; track role) {
+            <mat-option value="{{role['value']}}">{{role['viewValue']}}</mat-option>
+            }
+          </mat-select>
+          <mat-error>
+            {{errors['role']}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Seleccionar Estado</mat-label>
+          <mat-select formControlName="statu">
+            @for(statu of status; track statu) {
+            <mat-option value="{{statu['value']}}">{{statu['viewValue']}}</mat-option>
+            }
+          </mat-select>
+          <mat-error>
+            {{errors['statu']}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      @if (action === 'Agregar') {
+      <div class="input-password">
+        <mat-form-field>
+          <mat-label>Contraseña</mat-label>
+          <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
+          <mat-error>
+            {{errors['password']}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      }
+
+    </div>
+  </div>
+
+  <div mat-dialog-actions style="float: right;">
+    <div>
+      <button class="dialog-btn" mat-raised-button type="button" (click)="closeDialog()">{{cancel}}</button>
+      <button class="dialog-btn" mat-raised-button color="primary" type="submit"
+        >{{action}}</button>
+    </div>
+  </div>
+
+</form>

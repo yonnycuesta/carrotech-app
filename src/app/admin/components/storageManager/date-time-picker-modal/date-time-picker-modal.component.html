@@ -1,0 +1,14 @@
+<div class="modal-container">
+  <h2 class="modal-title">Programar horario de entrega</h2>
+  <div class="modal-content">
+    <mat-form-field class="time-field">
+      <mat-label>Selecciona la Hora </mat-label>
+      <input matInput [ngxMatTimepicker]="picker" [(ngModel)]="selectedTime" placeholder="Selecciona la hora">
+      <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+    </mat-form-field>
+  </div>
+  <div class="modal-actions">
+    <button mat-raised-button color="warn" (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()">Confirmar</button>
+  </div>
+</div>

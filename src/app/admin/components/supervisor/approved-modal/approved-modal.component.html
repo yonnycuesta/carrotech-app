@@ -1,0 +1,29 @@
+<div class="card-title">
+  <h1 mat-dialog-title>Modificar Estado</h1>
+</div>
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="statuForm" role="form">
+  <div mat-dialog-content style="padding: 20px;">
+    <mat-form-field style="width: 100%; margin-bottom: 20px;">
+      <mat-label>Seleccionar Estado</mat-label>
+      <mat-select formControlName="statu">
+        <mat-option value="">Seleccionar estado</mat-option>
+        <mat-option value="OPENEND">Aprobar</mat-option>
+        <mat-option value="REJECTED">Rechazar</mat-option>
+      </mat-select>
+      <mat-error>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field style="width: 100%; margin-bottom: 20px;">
+      <mat-label>Comentario</mat-label>
+      <textarea placeholder="Comentario" matInput formControlName="comment"></textarea>
+      <mat-error>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions style="padding: 10px 20px; display: flex; justify-content: flex-end;">
+    <button class="dialog-btn" mat-raised-button type="button" (click)="closeDialog()">Cancelar</button>
+    <button class="dialog-btn" mat-raised-button color="primary" type="submit" style="margin-left: 10px;">
+      Actualizar
+    </button>
+  </div>
+</form>

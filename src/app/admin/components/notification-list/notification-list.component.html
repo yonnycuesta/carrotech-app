@@ -1,0 +1,34 @@
+<div class="notification-container">
+<!-- 
+  <div>
+    <h2>Notifications</h2>
+    <ul>
+      <li *ngFor="let notification of notificationse">{{ notification }}</li>
+    </ul>
+  </div> -->
+
+
+  <h2 class="mat-h2">Mis Notificaciones</h2>
+  <mat-card *ngFor="let notification of notifications" @fadeIn class="notification-card"
+    [ngClass]="{'unread': !notification.read}">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon
+          [color]="getNotificationColor(notification.type)">{{getNotificationIcon(notification.type)}}</mat-icon>
+      </div>
+      <mat-card-title>{{notification.type | titlecase}}</mat-card-title>
+      <mat-card-subtitle>{{notification.created_at | date:'medium'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{notification.message}}</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button color="primary" (click)="markAsRead(notification.id)" *ngIf="!notification.read">
+        Marcar como leído
+      </button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar *ngIf="!notification.read" mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</div>

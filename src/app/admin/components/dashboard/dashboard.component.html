@@ -1,0 +1,16 @@
+<div class="dashboard-container">
+  <div class="dashboard-grid">
+    <mat-card *ngFor="let summary of orderSummaries" class="summary-card">
+      <mat-card-header>
+        <div mat-card-avatar class="header-image" [ngClass]="summary.color">
+          <mat-icon>{{summary.icon}}</mat-icon>
+        </div>
+        <mat-card-title>{{summary.status}}</mat-card-title>
+        <mat-card-subtitle>Cantidad de Ordenes</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="order-count">{{summary.count}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

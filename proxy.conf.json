@@ -1,0 +1,11 @@
+{
+  "/api/*": {
+    "target": "https://carrotech-api.eiasa.com.co",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

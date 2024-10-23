@@ -1,0 +1,50 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.navigation {
+  background: #bbd032;
+  color: white;
+}
+.example-container {
+  height: 100%;
+}
+.btn-toggle mat-icon{
+  color: white !important;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+.logo-container {
+  padding: 16px;
+  text-align: center;
+  background-color: #ffff;
+}
+
+.logo {
+  max-width: 80%;
+  height: auto;
+}
+
+mat-nav-list {
+  padding-top: 0;
+}
+
+mat-list-item {
+  height: 48px;
+}
+
+mat-icon {
+  margin-right: 16px;
+  color: #757575;
+}
+
+mat-expansion-panel{
+  box-shadow: none !important;
+}

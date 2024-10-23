@@ -1,0 +1,20 @@
+.profile-card {
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.avatar-placeholder {
+  background-color: #ccc;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+mat-card-header {
+  margin-bottom: 20px;
+}
+
+mat-list-item {
+  height: auto !important;
+  margin-bottom: 16px;
+}

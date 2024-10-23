@@ -1,0 +1,43 @@
+<mat-sidenav-container class="chat-container">
+  <mat-sidenav mode="side" opened class="contact-list">
+    <mat-nav-list>
+      <h3 matSubheader>Contactos</h3>
+      <a mat-list-item *ngFor="let contact of contacts" (click)="selectContact(contact)">
+        <img matListAvatar [src]="contact.avatar" [alt]="contact.name">
+        <span matLine>{{contact.name}}</span>
+        <span matLine class="demo-2">{{contact.status}}</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="chat-content">
+    <mat-toolbar color="primary">
+      <span>Chat con {{selectedContact?.name || 'Selecciona un contacto'}}</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="toggleNotifications()">
+        <mat-icon>{{notificationsEnabled ? 'notifications' : 'notifications_off'}}</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <div class="message-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <mat-card *ngFor="let message of messages"
+                [ngClass]="{'sent': message.sender === 'me', 'received': message.sender !== 'me'}">
+        <mat-card-content>{{message.text}}</mat-card-content>
+        <mat-card-footer>
+          <small>{{message.time | date:'short'}}</small>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <form (ngSubmit)="sendMessage()" class="message-form">
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Escribe un mensaje..." [(ngModel)]="newMessage" name="newMessage">
+      </mat-form-field>
+      <button mat-fab color="primary" type="submit">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </mat-sidenav-content>
+</mat-sidenav-container>

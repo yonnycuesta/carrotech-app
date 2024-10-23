@@ -1,0 +1,106 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgb(187, 208, 50);
+  background: linear-gradient(90deg, rgba(187, 208, 50, 1) 35%, rgba(119, 126, 114, 1) 100%);
+}
+
+.register-card {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 8px;
+  position: relative;
+  text-align: center;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.register-input {
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
+}
+
+.register-button {
+  width: 100%;
+  background: #bbd032 !important;
+  color: white !important;
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+.logo {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100px;
+  margin: 0 auto 20px;
+}
+
+/* Responsive breakpoints */
+
+@media (max-width: 768px) {
+  .register-card {
+    padding: 20px;
+  }
+
+  .register-input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 10px;
+  }
+
+  .register-card {
+    padding: 15px;
+  }
+
+  .logo {
+    max-height: 80px;
+  }
+
+  .register-button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 320px) {
+  .register-card {
+    padding: 10px;
+  }
+
+  .logo {
+    max-height: 60px;
+  }
+}
+
+.register-links{
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
+.register-links a{
+  margin-left: 10px;
+  color: #535850;
+  text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.register-links a:hover{
+  color: #bbd032;
+  text-decoration: underline;
+}
