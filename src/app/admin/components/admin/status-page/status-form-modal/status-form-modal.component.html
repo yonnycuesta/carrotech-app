@@ -1,0 +1,39 @@
+<div>
+  <h1 mat-dialog-title>{{action}} estado</h1>
+</div>
+
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="tableForm" role="form">
+
+  <div mat-dialog-content>
+    <div class="main-content">
+      <div class="input-form">
+        <mat-form-field>
+          <mat-label>Nombre (español)</mat-label>
+          <input matInput formControlName="spanish_name">
+          <mat-error>
+            {{errors['spanish_name']}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-form">
+        <mat-form-field>
+          <mat-label>Nombre (inglés)</mat-label>
+          <input matInput formControlName="english_name">
+          <mat-error>
+            {{errors['english_name']}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions style="float: right;">
+    <div>
+      <button class="dialog-btn" mat-raised-button type="button" (click)="closeDialog()">{{cancel}}</button>
+      <button class="dialog-btn" mat-raised-button color="primary" type="submit"
+        >{{action}}</button>
+    </div>
+  </div>
+
+</form>
+

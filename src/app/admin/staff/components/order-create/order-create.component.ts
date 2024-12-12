@@ -4,14 +4,14 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { BehaviorSubject, map, Observable, of, startWith, Subscription, switchMap } from 'rxjs';
 import { IItem, IOrdercCreate } from '../../../interfaces/order-interface';
 import { OrderStaffService } from '../../../services/order-staff.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AlertService } from '../../../services/alert.service';
 import { UserService } from '../../../services/user.service';
 import Swal from 'sweetalert2';
@@ -38,7 +38,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatAutocompleteModule,
     AsyncPipe,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    RouterModule,
+    MatIcon
   ],
   templateUrl: './order-create.component.html',
   styleUrl: './order-create.component.scss'
@@ -61,10 +63,14 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
   storage_manager_id: string = "";
   delivered_opt: string = "";
   comment: string = "";
+  zone: string = "";
   userId: any = "";
   optionMaterials!: Observable<any[]>;
   materials: any[] = [];
   panelOpenState = true;
+
+  delivered_site = 1;
+  warehouses: any;
 
   constructor(
     private fb: FormBuilder,
@@ -86,9 +92,12 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     this.subscription = this.items$.subscribe();
+
     this.getStorageManagers();
     this.getMaterials();
+    this.getWarehouses();
 
     this.optionMaterials = this.itemForm.get('item_name')!.valueChanges.pipe(
       startWith(''),
@@ -135,6 +144,16 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
     });
   }
 
+  getWarehouses() {
+    this._userService.indexWarehouses().subscribe({
+      next: (resp) => {
+        this.warehouses = resp;
+      },
+      error: (err) => {
+        console.log('Error: ', err);
+      }
+    });
+  }
 
   onOptionSelected(event: any) {
     const selectedMaterial = event.option.value;
@@ -166,17 +185,24 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
   }
 
   saveItems() {
-    const options = {
-      title: 'Guardar orden',
-      message: `¿Estás seguro de guardar la orden?`,
-      cancelText: 'NO',
-      confirmText: 'SI',
-    };
 
-    this.alertService.open(options);
-    this.alertService.confirmed().subscribe(confirmed => {
-      if (confirmed) {
-        this.validStorageManager();
+    if (this.itemsSubject.value.length <= 0) {
+      this.showSnackBar('No hay componentes para guardar');
+      return;
+    }
+
+    Swal.fire({
+      title: 'CREAR ORDEN',
+      text: '¿Desea crear esta Nueva Orden de Materiales/Equipos?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#117554',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, crear',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+
         Swal.fire({
           title: 'Creando su orden...',
           text: 'Por favor espere...',
@@ -191,9 +217,9 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
 
         const data: IOrdercCreate = {
           user_id: this.userId,
-          storage_manager_id: this.storage_manager_id,
           comment: this.comment,
-          delivered_opt: this.delivered_opt,
+          zone: this.zone,
+          delivered_opt: "Sytex",
           details: this.itemsSubject.value
         }
 
@@ -220,6 +246,12 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
             });
           }
         });
+      }else{
+        Swal.fire({
+          title: 'Cancelado',
+          text: 'No se ha creado la orden',
+          timer: 2000,
+        })
       }
     });
   }

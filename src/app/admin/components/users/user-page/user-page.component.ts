@@ -133,6 +133,7 @@ export class UserPageComponent implements OnInit {
   }
 
   openAddEditDialog(action: string, obj: any): void {
+    
     obj.action = action;
     const dialogRef = this.dialog.open(UserFormComponent, {
       data: obj,
@@ -153,30 +154,7 @@ export class UserPageComponent implements OnInit {
     });
   }
 
-  // This function will be called when user click on select all check-box
-  isAllSelected(): boolean {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
 
-  masterToggle(): void {
-    this.isAllSelected()
-      ? this.selection.clear()
-      : this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-
-
-  // Add a row into to data table
-  addRowData(row_obj: any): void {
-    const data = this.dataSource.data
-    data.push(row_obj);
-    this.dataSource.data = data;
-  }
-
-
-  // Open confirmation dialog
   openDeleteDialog(obj: any): void {
     const options = {
       title: 'Eliminar?',
@@ -199,29 +177,6 @@ export class UserPageComponent implements OnInit {
         });
       }
     });
-  }
-
-  // Show/Hide check boxes
-  showCheckBoxes(): void {
-    this.checkBoxList = this.displayedColumns;
-  }
-
-  hideCheckBoxes(): void {
-    this.checkBoxList = [];
-  }
-
-  toggleForm(): void {
-    this.checkBoxList.length ? this.hideCheckBoxes() : this.showCheckBoxes();
-  }
-
-  // Show/Hide columns
-  hideColumn(event: any, item: string) {
-    this.displayedColumns.forEach(element => {
-      if (element['def'] == item) {
-        element['hide'] = event.checked;
-      }
-    });
-    this.disColumns = this.displayedColumns.filter(cd => !cd.hide).map(cd => cd.def)
   }
 
 }

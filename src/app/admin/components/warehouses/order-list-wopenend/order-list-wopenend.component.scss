@@ -1,0 +1,58 @@
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.header-bodega {
+  background-color: #A9BCC2;
+}
+
+.color-span{
+  padding: 2px;
+  color: white;
+  border-radius: 5px;
+}
+
+.header-mat {
+  display: block;
+  width: 100%;
+}
+
+.item-btn {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: left;
+}
+
+.item-btn button {
+  margin-right: 10px;
+}
+
+.filters{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.filters .search{
+  width: 50%;
+}
+.filters .filter_range{
+  width: 50%;
+}
+.filters mat-form-field{
+  width: 100%;
+}
+
+.filter_range{
+  display: flex;
+  padding: 5px;
+}
+
+.card-title{
+  font-size: 16px;
+  display: flex;
+}

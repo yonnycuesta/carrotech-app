@@ -98,19 +98,25 @@ export class OrderApprovedComponent implements AfterViewInit, OnInit {
           this.dataSource.data = resp.sort((a: any, b: any) => a.shift - b.shift);
           this.isLoading = false;
         },
-        error: (err: any) => {
-          console.log('Error: ', err);
+        error: (err) => {
+          console.log(err);
           this.isLoading = false;
           Swal.fire({
-            title: 'Error',
-            text: 'Error: ' + err.error.detail,
-            icon: 'error',
-            timer: 2000
+            title: 'Sin ordenes',
+            text: err.error.detail + ' aprobadas en este momento.',
+            icon: 'info',
+            confirmButtonText: "Entendido"
           });
         }
       });
     } catch (error) {
-      console.log('Error al obtener las ordenes: ', error);
+      console.error(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al obtener las ordenes',
+        icon: 'error',
+        timer: 4000
+      });
     }
   }
 

@@ -49,11 +49,15 @@ export class OrderDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._route.params.subscribe(params => {
-      this.orderId = params['id'];
-    }, timeout(2000));
-
-    this.getDetails(this.orderId);
+    this._route.params.subscribe({
+      next: (params) => {
+        this.orderId = params['id'];
+        this.getDetails(this.orderId);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
   getDetails(id: string) {

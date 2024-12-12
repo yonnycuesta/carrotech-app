@@ -36,7 +36,7 @@ export class UserService {
   }
 
   store(user: any) {
-    return this._http.post(`${this.url}users/`, user);
+    return this._http.post(`${this.url}users`, user);
   }
 
   update(id: string, user: any) {
@@ -83,6 +83,27 @@ export class UserService {
       map((res: any) => res.data),
       catchError((err) => {
         console.log('Error al obtener el técnico: ', err);
+        return err;
+      })
+    );
+  }
+
+  // TODO:: Bodega
+  indexWarehouses(): Observable<any> {
+    return this._http.get(`${this.url}users/warehouses/`).pipe(
+      map((res: any) => res.data),
+      catchError((err) => {
+        console.log('Error al obtener el usuario Bodega: ', err);
+        return err;
+      })
+    );
+  }
+
+  indexWarehousesStaff(): Observable<any> {
+    return this._http.get(`${this.url}users/warehouse-staff/`).pipe(
+      map((res: any) => res.data),
+      catchError((err) => {
+        console.log('Error al obtener el usuario Bodega Personal: ', err);
         return err;
       })
     );

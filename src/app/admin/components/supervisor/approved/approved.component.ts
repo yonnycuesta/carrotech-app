@@ -72,19 +72,32 @@ export class ApprovedComponent implements OnInit {
         error: (error) => {
           this.isLoading = false;
           console.error(error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: error.error.detail
-          });
+          this.handleError(error);
         }
       });
     } catch (error) {
       this.isLoading = false;
       console.error(error);
+      this.handleError(error);
     }
   }
 
+  private handleError(error: any): void {
+    if (error.status === 404) {
+      Swal.fire({
+        title: 'Sin ordenes',
+        text: error.error.detail,
+        confirmButtonText: "Entendido"
+      });
+    } else {
+      console.error('Error al cargar datos del almacén:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al cargar los datos del carro bodega'
+      });
+    }
+  }
 
   updateStatu(order: any) {
     const dialogRef = this.dialog.open(ApprovedModalComponent, {
@@ -93,14 +106,18 @@ export class ApprovedComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result.data.action != 'Cancelar') {
-        this.getAll();
-        Swal.fire({
-          title: 'Orden actualizada',
-          text: 'La orden ha sido actualizada con éxito',
-          icon: 'success',
-          timer: 2000
-        });
+      if (result) {
+        const action = result.data['action'];
+        delete result.data['action'];
+        if (action == "update") {
+          this.getAll();
+          Swal.fire({
+            title: 'Orden aprobada',
+            text: 'La orden ha sido aprobada con éxito',
+            icon: 'success',
+            timer: 2000
+          });
+        }
       }
     });
   }

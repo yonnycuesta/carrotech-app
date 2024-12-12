@@ -1,5 +1,5 @@
 import { computed, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
-import { AuthStatus, ICheckTokenResponse, ILoginResponse, User, UserWithToken } from '../../interfaces/auth';
+import { AuthStatus, ICheckTokenResponse, ILoginResponse, User } from '../../interfaces/auth';
 import { BehaviorSubject, catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
@@ -23,7 +23,7 @@ export class AuthService {
     private _http: HttpClient
   ) {
 
-    this.checkAuthStatus().subscribe();
+    // this.checkAuthStatus().subscribe();
 
   }
 
@@ -36,7 +36,7 @@ export class AuthService {
     return this._http.post<ILoginResponse>(url, data).pipe(
       tap(({ user, token }) => {
         this._currentUser.set(user);
-        this._authStatus.set(AuthStatus.authenticated);
+        // this._authStatus.set(AuthStatus.authenticated);
         localStorage.setItem('token', token);
       }),
       map(() => true),
@@ -54,12 +54,12 @@ export class AuthService {
     return this._http.get<ICheckTokenResponse>(url, { headers }).pipe(
       map(({ token, user }) => {
         this._currentUser.set(user);
-        this._authStatus.set(AuthStatus.authenticated);
+        // this._authStatus.set(AuthStatus.authenticated);
         localStorage.setItem('token', token);
         return true;
       }),
       catchError((err) => {
-        this._authStatus.set(AuthStatus.notAuthenticated);
+        // this._authStatus.set(AuthStatus.notAuthenticated);
         return of(false);
       })
     );
@@ -68,7 +68,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this._currentUser.set(null);
-    this._authStatus.set(AuthStatus.notAuthenticated);
+    // this._authStatus.set(AuthStatus.notAuthenticated);
   }
 
   getRole(): string | undefined {

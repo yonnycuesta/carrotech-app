@@ -16,6 +16,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProgressComponent } from '../../../../helpers/progress/progress.component';
 import { AuthService } from '../../../../../home/services/auth/auth.service';
 import { OrderStaffService } from '../../../../services/order-staff.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-list-completed',
@@ -64,6 +65,7 @@ export class OrderListCompletedComponent implements OnInit {
       },
       error: (error) => {
         console.error(error);
+
       }
     });
   }
@@ -78,10 +80,22 @@ export class OrderListCompletedComponent implements OnInit {
         error: (err) => {
           console.log(err);
           this.isLoading = false;
+          Swal.fire({
+            title: 'Sin ordenes',
+            text: err.error.detail + ' completadas en este momento.',
+            icon: 'info',
+            confirmButtonText: "Entendido"
+          });
         }
       });
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al obtener las ordenes',
+        icon: 'error',
+        timer: 4000
+      });
     }
   }
 

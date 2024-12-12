@@ -17,6 +17,10 @@ export class OrderStoragaManagerService {
 
   constructor(private _http: HttpClient) { }
 
+
+  indexReceivend(manager_id: string): Observable<any> {
+    return this._http.get(`${this.url}orders-storage_manager/all-received/${manager_id}`);
+  }
   index(manager_id: any, statu: string): Observable<any> {
     return this._http.get(`${this.url}orders-storage_manager/all/${manager_id}/${statu}`);
   }
@@ -29,10 +33,13 @@ export class OrderStoragaManagerService {
     return this._http.get(`${this.url}orders-storage_manager/all-approved/${manager_id}`);
   }
 
+  indexpreCompleted(manager_id: string): Observable<any> {
+    return this._http.get(`${this.url}orders-storage_manager/all-precompleted/${manager_id}`);
+  }
+
   indexCompleted(manager_id: string): Observable<any> {
     return this._http.get(`${this.url}orders-storage_manager/all-completed/${manager_id}`);
   }
-
 
   getOrder(id: string) {
     return this._http.get(`${this.url}orders-storage_manager/${id}`);

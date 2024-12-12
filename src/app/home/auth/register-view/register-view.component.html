@@ -1,7 +1,7 @@
 <div class="content">
   <mat-card class="register-card">
-    <img src="assets/images/logo.png" alt="Logo" class="logo">
-    <h2>Registro</h2>
+    <img [src]="logue" alt="Logo" class="logo">
+    <h2>Crear Usuario</h2>
     <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
       <div class="form-row">
         <mat-form-field appearance="fill" class="register-input">

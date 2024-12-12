@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>
+  ASIGNAR ÓRDENES
+</h2>
+
+<mat-dialog-content>
+  <p>Seleccionar el Personal</p>
+  <div class="content">
+    <mat-form-field>
+      <mat-label>Seleccionar</mat-label>
+      <mat-select [(ngModel)]="assignedId">
+        <mat-option *ngFor="let item of users" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+    Cerrar</button>
+  <button mat-raised-button color="primary" (click)="onSave()">
+    <mat-icon>how_to_reg</mat-icon>
+    Asignar</button>
+</mat-dialog-actions>

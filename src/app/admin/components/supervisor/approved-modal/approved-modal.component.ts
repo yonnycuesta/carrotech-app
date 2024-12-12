@@ -60,7 +60,7 @@ export class ApprovedModalComponent implements OnInit {
     this.statuForm.value.order_id = this.orderId;
     this.sOrder.updateStatus(this.orderId, this.statuForm.value).subscribe({
       next: (resp) => {
-        this.dialogRef.close({ data: { action: 'Actualizado' } });
+        this.dialogRef.close({ data: { action: 'update' } });
         this.statuForm.reset();
       },
       error: (err) => {

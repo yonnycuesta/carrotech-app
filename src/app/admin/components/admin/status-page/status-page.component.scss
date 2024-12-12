@@ -1,0 +1,29 @@
+table,
+.form-fields {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.responsive-table {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.search-icon {
+  font-size: 30px !important;
+}
+
+
+.header-table {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-form-field {
+  width: 95%;
+}

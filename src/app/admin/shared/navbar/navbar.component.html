@@ -1,53 +1,160 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" opened="false">
     <div class="logo-container">
-      <img src="assets/images/logo.png" alt="Logo de la empresa" class="logo">
+      <img [src]="logue" alt="Logo de la empresa" class="logo">
     </div>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/dashboard']">
         <mat-icon matListItemIcon>home</mat-icon>
         <span matListItemTitle>Panel Principal</span>
       </a>
+      <!-- <a mat-list-item [routerLink]="['/ordenes_programadas']" *ngIf="role() != 'warehouse_admin'">
+        <mat-icon matListItemIcon>event_upcoming</mat-icon>
+        <span matListItemTitle>Programadas</span>
+      </a> -->
 
-      <mat-expansion-panel>
+      <!--TODO::TECNICO-->
+      <!-- <mat-expansion-panel *ngIf="role() == 'staff'"> -->
+      <!-- <mat-expansion-panel-header>
+          <mat-icon matListItemIcon>assignment</mat-icon>
+          <span matListItemTitle>Órdenes</span>
+        </mat-expansion-panel-header> -->
+      <mat-nav-list *ngIf="role() == 'staff'">
+        <a mat-list-item routerLink="/ordenes_abiertas/staff/{{user()?.id}}">
+          <mat-icon matListItemIcon>inbox</mat-icon>
+          <span matListItemTitle>Abiertas</span>
+        </a>
+        <a mat-list-item routerLink="ordenes_por_aprobar/staff/{{user()?.id}}">
+          <mat-icon matListItemIcon>hourglass_empty</mat-icon>
+          <span matListItemTitle>Por confirmar</span>
+        </a>
+        <a mat-list-item routerLink="/ordenes_aprobadas/staff/{{user()?.id}}">
+          <mat-icon matListItemIcon>thumb_up</mat-icon>
+          <span matListItemTitle>Aprobadas</span>
+        </a>
+        <a mat-list-item routerLink="/ordenes_preparadas/staff/{{user()?.id}}">
+          <mat-icon matListItemIcon>done_all</mat-icon>
+          <span matListItemTitle>Preparadas</span>
+        </a>
+        <a mat-list-item routerLink="/ordenes_completadas/staff/{{user()?.id}}">
+          <mat-icon matListItemIcon>check_circle</mat-icon>
+          <span matListItemTitle>Completadas</span>
+        </a>
+        <!-- <a mat-list-item routerLink="/ordenes_completadas/staff/{{user()?.id}}">
+            <mat-icon matListItemIcon>cancell</mat-icon>
+            <span matListItemTitle>Canceladas</span>
+          </a> -->
+      </mat-nav-list>
+      <!-- </mat-expansion-panel> -->
+
+      <!--TODO::CARRO BODEGA-->
+      <mat-expansion-panel *ngIf="role() == 'storage_manager'">
         <mat-expansion-panel-header>
-          <mat-icon>assignment</mat-icon>
-          <span>Órdenes</span>
+          <mat-icon matListItemIcon>assignment</mat-icon>
+          <span matListItemTitle>Órdenes</span>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a mat-list-item *ngIf="role() == 'admin'" routerLink="/order_admin">
-            <mat-icon>list</mat-icon>
-            <span>Todas</span>
+          <a mat-list-item routerLink="/ordenes_recibidas/{{user()?.id}}">
+            <mat-icon matListItemIcon>move_to_inbox</mat-icon>
+            <span matListItemTitle>Recibidas</span>
           </a>
-          <a mat-list-item *ngIf="role() == 'storage_manager'" routerLink="/ordenes_abiertas/{{user()?.id}}">
-            <mat-icon>inbox</mat-icon>
-            <span>Abiertas</span>
+          <a mat-list-item routerLink="/ordenes_abiertas/{{user()?.id}}">
+            <mat-icon matListItemIcon>inbox</mat-icon>
+            <span matListItemTitle>Abiertas</span>
           </a>
-          <a mat-list-item *ngIf="role() == 'storage_manager'" routerLink="/ordenes_aprobadas/{{user()?.id}}">
-            <mat-icon>thumb_up</mat-icon>
-            <span>Aprobadas</span>
+          <a mat-list-item routerLink="/ordenes_aprobadas/{{user()?.id}}">
+            <mat-icon matListItemIcon>thumb_up</mat-icon>
+            <span matListItemTitle>Aprobadas</span>
           </a>
-          <a mat-list-item *ngIf="role() == 'storage_manager'" routerLink="/ordenes_completadas/{{user()?.id}}">
-            <mat-icon>check_circle</mat-icon>
-            <span>Completadas</span>
+          <a mat-list-item routerLink="/ordenes_pre-completadas/{{user()?.id}}">
+            <mat-icon matListItemIcon>autorenew</mat-icon>
+            <span matListItemTitle>Pre-completadas</span>
           </a>
-
-          <a mat-list-item *ngIf="role() == 'staff'" routerLink="/ordenes_abiertas/staff/{{user()?.id}}">
-            <mat-icon>inbox</mat-icon>
-            <span>Abiertas</span>
+          <a mat-list-item routerLink="/ordenes_completadas/{{user()?.id}}">
+            <mat-icon matListItemIcon>check_circle</mat-icon>
+            <span matListItemTitle>Completadas</span>
           </a>
-          <a mat-list-item *ngIf="role() == 'staff'" routerLink="/ordenes_aprobadas/staff/{{user()?.id}}">
-            <mat-icon>thumb_up</mat-icon>
-            <span>Aprobadas</span>
-          </a>
-          <a mat-list-item *ngIf="role() == 'staff'" routerLink="/ordenes_completadas/staff/{{user()?.id}}">
-            <mat-icon>check_circle</mat-icon>
-            <span>Completadas</span>
-          </a>
-
         </mat-nav-list>
       </mat-expansion-panel>
 
+
+      <!--TODO:: BODEGA -->
+      <!-- <mat-expansion-panel *ngIf="role() == 'warehouse_admin'"> -->
+      <!-- <mat-expansion-panel-header>
+          <mat-icon matListItemIcon>inventory_2</mat-icon>
+          <span matListItemTitle>Bodega</span>
+        </mat-expansion-panel-header> -->
+      <mat-nav-list *ngIf="role() == 'warehouse_admin'">
+        <a mat-list-item routerLink="/ordenes_abiertas/bodega/{{user()?.id}}">
+          <mat-icon matListItemIcon>inbox</mat-icon>
+          <span matListItemTitle>Abiertas</span>
+        </a>
+        <a mat-list-item routerLink="/ordenes_aprobadas/bodega/{{user()?.id}}">
+          <mat-icon matListItemIcon>thumb_up</mat-icon>
+          <span matListItemTitle>Aprobadas</span>
+        </a>
+        <a mat-list-item routerLink="/ordenes_preparadas/bodega/{{user()?.id}}">
+          <mat-icon matListItemIcon>done_all</mat-icon>
+          <span matListItemTitle>Preparadas</span>
+        </a>
+        <a mat-list-item routerLink="/ordenes_completadas/bodega/{{user()?.id}}">
+          <mat-icon matListItemIcon>check_circle</mat-icon>
+          <span matListItemTitle>Completadas</span>
+        </a>
+        <!-- <a mat-list-item routerLink="/ordenes_completadas/bodega/{{user()?.id}}">
+            <mat-icon matListItemIcon>delete</mat-icon>
+            <span matListItemTitle>Expiradas</span>
+          </a> -->
+      </mat-nav-list>
+      <!-- </mat-expansion-panel> -->
+
+      <!-- <mat-expansion-panel *ngIf="role() == 'warehouse_admin'">
+        <mat-expansion-panel-header>
+          <mat-icon matListItemIcon>local_shipping</mat-icon>
+          <span matListItemTitle>Carros Bodega</span>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/ordenes_abiertas/bodega-carros">
+            <mat-icon matListItemIcon>inbox</mat-icon>
+            <span matListItemTitle>Abiertas</span>
+          </a>
+          <a mat-list-item routerLink="/ordenes_aprobadas/bodega-carros">
+            <mat-icon matListItemIcon>thumb_up</mat-icon>
+            <span matListItemTitle>Aprobadas</span>
+          </a>
+          <a mat-list-item routerLink="/ordenes_preparadas/bodega-carros">
+            <mat-icon matListItemIcon>done_all</mat-icon>
+            <span matListItemTitle>Preparadas</span>
+          </a>
+          <a mat-list-item routerLink="/ordenes_transferidas/bodega-carros">
+            <mat-icon matListItemIcon>send</mat-icon>
+            <span matListItemTitle>Transferidas</span>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel> -->
+
+
+      <mat-nav-list *ngIf="role() == 'warehouse_staff'">
+        <a mat-list-item routerLink="/ordenes_abiertas/bodega-personal/{{user()?.id}}">
+          <mat-icon matListItemIcon>inbox</mat-icon>
+          <span matListItemTitle>Abiertas</span>
+        </a>
+        <a mat-list-item routerLink="/ordenes_aprobadas/bodega-personal/{{user()?.id}}">
+          <mat-icon matListItemIcon>thumb_up</mat-icon>
+          <span matListItemTitle>Aprobadas</span>
+        </a>
+        <a mat-list-item routerLink="/ordenes_preparadas/bodega-personal/{{user()?.id}}">
+          <mat-icon matListItemIcon>done_all</mat-icon>
+          <span matListItemTitle>Preparadas</span>
+        </a>
+        <a mat-list-item routerLink="/ordenes_transferidas/bodega-personal/{{user()?.id}}">
+          <mat-icon matListItemIcon>check_circle</mat-icon>
+          <span matListItemTitle>Completadas</span>
+        </a>
+      </mat-nav-list>
+
+
+      <!--TODO:: SUPERVISOR-->
       <mat-expansion-panel *ngIf="role() == 'supervisor'">
         <mat-expansion-panel-header>
           <mat-icon>assignment</mat-icon>
@@ -55,44 +162,59 @@
         </mat-expansion-panel-header>
         <mat-nav-list>
           <a mat-list-item routerLink="/order_admin">
-            <mat-icon>list</mat-icon>
-            <span>Todas</span>
+            <mat-icon matListItemIcon>list</mat-icon>
+            <span matListItemTitle>Todas</span>
           </a>
           <a mat-list-item routerLink="ordenes_por_aprobar">
-            <mat-icon>hourglass_empty</mat-icon>
-            <span>Por aprobar</span>
+            <mat-icon matListItemIcon>hourglass_empty</mat-icon>
+            <span matListItemTitle>Por aprobar</span>
           </a>
           <a mat-list-item routerLink="ordenes_rechazadas">
-            <mat-icon>cancel</mat-icon>
-            <span>Rechazadas</span>
+            <mat-icon matListItemIcon>cancel</mat-icon>
+            <span matListItemTitle>Rechazadas</span>
           </a>
         </mat-nav-list>
       </mat-expansion-panel>
 
-      <a mat-list-item [routerLink]="['/usuarios']" *ngIf="role() == 'admin'">
-        <mat-icon matListItemIcon>people</mat-icon>
-        <span matListItemTitle>Usuarios</span>
-      </a>
-
-      <a mat-list-item [routerLink]="['/ordenes_programadas']">
-        <mat-icon matListItemIcon>event_upcoming</mat-icon>
-        <span matListItemTitle>Agenda</span>
-      </a>
-
-      <a mat-list-item [routerLink]="['/materiales']" *ngIf="role() == 'admin'">
-        <mat-icon matListItemIcon>inventory_2</mat-icon>
-        <span matListItemTitle>Materiales</span>
-      </a>
-
-      <a mat-list-item [routerLink]="['/carros']" *ngIf="role() == 'admin'">
-        <mat-icon matListItemIcon>local_shipping</mat-icon>
-        <span matListItemTitle>Carros</span>
-      </a>
-
-      <a mat-list-item [routerLink]="['/auth_logs']" *ngIf="role() == 'admin'">
-        <mat-icon matListItemIcon>login</mat-icon>
-        <span matListItemTitle>Accesos (Logs)</span>
-      </a>
+      <!--TODO:: ADMINISTRADOR-->
+      <mat-expansion-panel *ngIf="role() == 'admin'">
+        <mat-expansion-panel-header>
+          <mat-icon>assignment</mat-icon>
+          <span>Órdenes</span>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/order_admin">
+            <mat-icon matListItemIcon>list</mat-icon>
+            <span matListItemTitle>Todas</span>
+          </a>
+          <a mat-list-item routerLink="ordenes_por_aprobar">
+            <mat-icon matListItemIcon>hourglass_empty</mat-icon>
+            <span matListItemTitle>Por aprobar</span>
+          </a>
+          <a mat-list-item routerLink="ordenes_rechazadas">
+            <mat-icon matListItemIcon>cancel</mat-icon>
+            <span matListItemTitle>Rechazadas</span>
+          </a>
+          <a mat-list-item routerLink="/ordenes_estados">
+            <mat-icon matListItemIcon>change_circle</mat-icon>
+            <span matListItemTitle>Estados</span>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+      <mat-nav-list *ngIf="role() == 'admin'">
+        <a mat-list-item [routerLink]="['/usuarios']">
+          <mat-icon matListItemIcon>people</mat-icon>
+          <span matListItemTitle>Usuarios</span>
+        </a>
+        <a mat-list-item [routerLink]="['/materiales']">
+          <mat-icon matListItemIcon>inventory_2</mat-icon>
+          <span matListItemTitle>Materiales</span>
+        </a>
+        <a mat-list-item [routerLink]="['/auth_logs']">
+          <mat-icon matListItemIcon>login</mat-icon>
+          <span matListItemTitle>Accesos (Logs)</span>
+        </a>
+      </mat-nav-list>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -116,7 +238,7 @@
       <mat-menu #userMenu="matMenu">
         <a mat-menu-item routerLink="/perfil/{{user()?.id}}">
           <mat-icon>person</mat-icon>
-          <span>Perfil</span>
+          <span>Mi perfil</span>
         </a>
         <button mat-menu-item (click)="logout()">
           <mat-icon>exit_to_app</mat-icon>

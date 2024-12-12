@@ -12,7 +12,8 @@ import { UserService } from '../../../services/user.service';
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule, MatSelectModule, MatLabel,
+  imports: [
+    MatDialogModule, MatButtonModule, MatSelectModule, MatLabel,
     MatError, MatInputModule, MatIconModule,
     MatFormFieldModule, MatFormField, ReactiveFormsModule,
   ],
@@ -51,7 +52,9 @@ export class UserFormComponent implements OnInit {
       { value: 'guest', viewValue: 'Invitado' },
       { value: 'staff', viewValue: 'Técnico' },
       { value: 'supervisor', viewValue: 'Supervisor' },
-      { value: 'storage_manager', viewValue: 'Carro Bodega' }
+      { value: 'storage_manager', viewValue: 'Carro Bodega' },
+      { value: 'warehouse_admin', viewValue: 'Administrador Bodega' },
+      { value: 'warehouse_staff', viewValue: 'Personal Bodega' },
     ];
 
     this.status = [

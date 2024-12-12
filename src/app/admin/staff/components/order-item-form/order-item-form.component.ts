@@ -158,10 +158,12 @@ export class OrderItemFormComponent implements OnInit, OnDestroy {
     this.alertService.open(options);
     this.alertService.confirmed().subscribe(confirmed => {
       if (confirmed) {
+
         const data: IOrderItem = {
           order_id: this.orderID,
           items: this.itemsSubject.value
         }
+
         this.sOrder.storeItems(this.orderID, data).subscribe({
           next: (resp) => {
             Swal.fire('Componentes Agregados correctamente', '', 'success');
@@ -173,6 +175,7 @@ export class OrderItemFormComponent implements OnInit, OnDestroy {
             console.log('Error: ', err);
           }
         });
+
       }
     });
   }

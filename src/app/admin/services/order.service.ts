@@ -27,4 +27,29 @@ export class OrderService {
   delete(id: string): Observable<any> {
     return this._http.delete(`${this.url}orders/${id}`);
   }
+
+
+
+  // TODO:: ESTADOS
+
+
+  indexStatus() {
+    return this._http.get(`${this.url}orders-status/`);
+  }
+
+  storeStatus(data: any) {
+    return this._http.post(`${this.url}orders-status/`, data);
+  }
+
+  updateStatus(id: string, data: any) {
+    return this._http.put(`${this.url}orders-status/${id}`, data);
+  }
+
+  showStatus(id: string) {
+    return this._http.get(`${this.url}orders-status/${id}`);
+  }
+
+  deleteStatus(id: string) {
+    return this._http.delete(`${this.url}orders-status/${id}`);
+  }
 }

@@ -20,9 +20,17 @@ export class OrderStaffService {
   indexApproved(staff_id: any): Observable<any> {
     return this._http.get(`${this.url}orders-staff/all-approved/${staff_id}`);
   }
+  indexPrepared(staff_id: any): Observable<any> {
+    return this._http.get(`${this.url}orders-staff/all-prepared/${staff_id}`);
+  }
   indexCompleted(staff_id: any): Observable<any> {
     return this._http.get(`${this.url}orders-staff/all-completed/${staff_id}`);
   }
+
+  indexPending(staff_id: any): Observable<any> {
+    return this._http.get(`${this.url}orders-staff/all-pending-toconfirmed/${staff_id}`);
+  }
+
 
   storeItems(id: string, items: IOrderItem) {
     return this._http.post(`${this.url}orders-staff/add-item/${id}`, items);

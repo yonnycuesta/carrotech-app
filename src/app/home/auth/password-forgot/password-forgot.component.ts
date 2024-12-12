@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { logueB64 } from '../../../admin/helpers/form-validator';
 
 @Component({
   selector: 'app-password-forgot',
@@ -34,6 +35,8 @@ export class PasswordForgotComponent implements OnInit {
   ToasterPosition = ToasterPosition;
   submitted: boolean = false;
   hide = true;
+  logue: any = logueB64.data;
+
 
   constructor(
     private fb: FormBuilder,

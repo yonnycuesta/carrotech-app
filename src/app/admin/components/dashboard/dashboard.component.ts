@@ -53,9 +53,27 @@ export class DashboardComponent implements OnInit {
         break;
       case 'staff':
         this.orderSummaries = [
-          { status: 'Abiertas', count: resp.openend, icon: 'inbox', color: 'primary' },
+          { status: 'Abiertas', count: resp.openend + resp.inwarehouse, icon: 'inbox', color: 'primary' },
           { status: 'Aprobadas', count: resp.approved, icon: 'check_circle', color: 'accent' },
+          { status: 'Preparadas', count: resp.prepared, icon: 'done_all', color: 'info' },
+          { status: 'Por confirmar', count: resp.tobe_confirmed, icon: 'hourglass_empty', color: 'accent' },
           { status: 'Canceladas', count: resp.cancelled, icon: 'cancel', color: 'warn' },
+          { status: 'Completadas', count: resp.completed, icon: 'flag', color: 'info' }
+        ];
+        break;
+      case 'warehouse_admin':
+        this.orderSummaries = [
+          { status: 'Abiertas/Asignadas', count: resp.inwarehouse, icon: 'inbox', color: 'primary' },
+          { status: 'Aprobadas', count: resp.approved, icon: 'check_circle', color: 'accent' },
+          { status: 'Preparadas', count: resp.prepared, icon: 'done_all', color: 'accent' },
+          { status: 'Completadas', count: resp.completed, icon: 'flag', color: 'info' }
+        ];
+        break;
+      case 'warehouse_staff':
+        this.orderSummaries = [
+          { status: 'Abiertas/Asignadas', count: resp.inwarehouse, icon: 'inbox', color: 'primary' },
+          { status: 'Aprobadas', count: resp.approved, icon: 'check_circle', color: 'accent' },
+          { status: 'Preparadas', count: resp.prepared, icon: 'done_all', color: 'accent' },
           { status: 'Completadas', count: resp.completed, icon: 'flag', color: 'info' }
         ];
         break;

@@ -6,3 +6,18 @@ table {
   font-size: 14px;
   width: 100%;
 }
+
+.header-mat {
+  display: block;
+  width: 100%;
+}
+
+.item-btn {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: left;
+}
+
+.item-btn button {
+  margin-right: 10px;
+}

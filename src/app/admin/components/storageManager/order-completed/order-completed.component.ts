@@ -99,18 +99,25 @@ export class OrderCompletedComponent implements AfterViewInit, OnInit {
           this.dataSource.data = resp.sort((a: any, b: any) => a.shift - b.shift);
           this.isLoading = false;
         },
-        error: (err: any) => {
-          console.log('Error: ', err);
+        error: (err) => {
+          console.log(err);
+          this.isLoading = false;
           Swal.fire({
-            title: 'Error',
-            text: 'Error: ' + err.error.detail,
-            icon: 'error',
-            timer: 2000
+            title: 'Sin ordenes',
+            text: err.error.detail + ' completadas en este momento.',
+            icon: 'info',
+            confirmButtonText: "Entendido"
           });
         }
       });
     } catch (error) {
-      console.log('Error al obtener las ordenes: ', error);
+      console.error(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al obtener las ordenes',
+        icon: 'error',
+        timer: 4000
+      });
     }
   }
 
@@ -136,46 +143,6 @@ export class OrderCompletedComponent implements AfterViewInit, OnInit {
           console.error('Error al descargar el archivo: ', err);
         }
       })
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  newSytexMO(id: string) {
-    try {
-      Swal.fire({
-        title: 'Creando MO...',
-        text: 'Por favor espere mientras se crea la MO en SYTEX.',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        showConfirmButton: false,
-        didOpen: () => {
-          Swal.showLoading();
-        }
-      });
-
-      this.sOrderMang.newSytexMO(id).subscribe({
-        next: (res: any) => {
-          Swal.close();
-          Swal.fire({
-            title: 'Código de la MO: ' + res.operation,
-            text: res.message,
-            icon: 'success',
-            showConfirmButton: true,
-            showCloseButton: true,
-            confirmButtonText: "Ententido",
-          });
-        },
-        error: (err: any) => {
-          Swal.close();
-          console.error('Error al crear la MO: ', err);
-          Swal.fire({
-            title: 'Error',
-            text: 'Error al crear la MO en SYTEX.',
-            icon: 'error',
-          });
-        }
-      });
     } catch (error) {
       console.error(error);
     }

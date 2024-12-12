@@ -97,10 +97,22 @@ export class OrderListOpenendComponent implements OnInit {
         error: (err) => {
           console.log(err);
           this.isLoading = false;
+          Swal.fire({
+            title: 'Sin ordenes',
+            text: err.error.detail + ' abiertas en este momento.',
+            icon: 'info',
+            confirmButtonText: "Entendido"
+          });
         }
       });
     } catch (error) {
-        console.error(error);
+      console.error(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al obtener las ordenes',
+        icon: 'error',
+        timer: 4000
+      });
     }
 
   }
@@ -123,31 +135,39 @@ export class OrderListOpenendComponent implements OnInit {
   }
 
   removeItem(id: string) {
-    const options = {
+    Swal.fire({
       title: 'Eliminar Componente',
-      message: `¿Estás seguro de eliminar el item?`,
-      cancelText: 'NO',
-      confirmText: 'SI',
-    };
-
-    this.alertService.open(options);
-
-    this.alertService.confirmed().subscribe(confirmed => {
-      if (confirmed) {
+      text: '¿Estás seguro de eliminar el componente?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#117554',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
         this._sOrder.deleteItem(id).subscribe({
-          next: (resp) => {
-            Swal.fire('Componente eliminado correctamente', '', 'success');
+          next: (resp: any) => {
+            Swal.fire({
+              title: 'Componente eliminado',
+              text: resp.message,
+              icon: 'success',
+              timer: 2000
+            });
             this.getOrders();
           },
           error: (err) => {
+            Swal.fire({
+              title: 'Error al eliminar el componente',
+              text: err.error.message,
+              icon: 'error',
+            });
             console.log('Error: ', err);
           }
         });
       }
     });
-
   }
-
 
   cancel(order: any) {
     const dialogRef = this.dialog.open(OrderStatuComponent, {
@@ -157,7 +177,20 @@ export class OrderListOpenendComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-
+      const action = result.data.action;
+      if (action == 'Cancelar') {
+        Swal.fire({
+          title: 'Acción cancelada',
+          text: 'La ación ha sido cancelada exitosamente',
+          timer: 2000
+        });
+      } else {
+        Swal.fire({
+          title: 'Acción realizada',
+          text: 'La orden ha sido cancelada exitosamente',
+          timer: 2000
+        });
+      }
     });
   }
 

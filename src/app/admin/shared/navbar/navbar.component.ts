@@ -7,8 +7,6 @@ import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatMenu, MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
-import { AuthStatus } from '../../../home/interfaces/auth';
-import { FooterComponent } from '../footer/footer.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../../home/services/auth/auth.service';
 import Pusher from 'pusher-js';
 import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
+import { logueB64 } from '../../helpers/form-validator';
 
 @Component({
   selector: 'app-navbar',
@@ -35,7 +34,6 @@ import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansi
     RouterModule,
     MatMenu,
     MatMenuModule,
-    FooterComponent,
     MatBadgeModule,
     MatFormFieldModule,
     ChatSupportComponent,
@@ -51,6 +49,8 @@ export class NavbarComponent implements OnInit {
   authService = inject(AuthService);
   public role = computed(() => this.authService.getRole());
   public user = computed(() => this.authService.currentUser());
+
+  logue: any = logueB64.data;
 
   userId: any;
   showFiller = false;

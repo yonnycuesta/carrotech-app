@@ -19,15 +19,6 @@
     </div>
   </div>
 
-  <div class="prl15 pt10">
-    <div class="row wrap" [@animation] class="mb5">
-      <div fxFlex="20" fxFlex.lt-sm="50" *ngFor="let item of checkBoxList">
-        <mat-checkbox (change)="hideColumn($event, item.def)" [checked]="item.hide">
-          {{ item.label }}
-        </mat-checkbox>
-      </div>
-    </div>
-  </div>
 
   <table mat-table [dataSource]="dataSource" matSort>
 
@@ -71,7 +62,7 @@
           <mat-icon>edit</mat-icon>
         </button>
 
-        <button mat-icon-button color="primary" (click)="openDeleteDialog(row)" matTooltip="Eliminar">
+        <button mat-icon-button color="warn" (click)="openDeleteDialog(row)" matTooltip="Eliminar">
           <mat-icon>delete</mat-icon>
         </button>
 
@@ -82,10 +73,6 @@
     <tr mat-row *matRowDef="let row; columns: disColumns;"></tr>
   </table>
 
-  <!-- <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
-    <mat-progress-spinner color="primary" mode="indeterminate">
-    </mat-progress-spinner>
-  </mat-card> -->
   <app-progress [isLoading]="isLoading"></app-progress>
 
 </div>

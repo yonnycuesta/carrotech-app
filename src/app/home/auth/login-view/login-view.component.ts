@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
 import { MatIconModule } from '@angular/material/icon';
 import Swal from 'sweetalert2';
+import { logueB64 } from '../../../admin/helpers/form-validator';
 @Component({
   selector: 'app-login-view',
   standalone: true,
@@ -35,7 +36,8 @@ export class LoginViewComponent implements OnInit {
   ToasterPosition = ToasterPosition;
   submitted: boolean = false;
   hidePassword = true;
-  logo: string = "assets/images/logo.png";
+  logue: any = logueB64.data;
+
 
   constructor(
     private fb: FormBuilder,

@@ -1,0 +1,108 @@
+.example-action-buttons {
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+
+.orders-container {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.order-panel {
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.order-details {
+  padding: 16px;
+}
+
+.order-items-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+mat-panel-title {
+  font-weight: bold;
+}
+
+mat-panel-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+h3 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.order-header {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}
+
+.mat-icon-button {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 8px;
+}
+
+.mat-icon-button .mat-icon {
+  font-size: 18px;
+}
+
+
+.header-preparada {
+  background-color: rgb(70, 137, 107);
+}
+
+
+.card-title {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.span-statu {
+  font-size: 0.9em;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100px;
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.filter-button{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.filter-search mat-form-field{
+  width: 100%;
+}
+.example-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+

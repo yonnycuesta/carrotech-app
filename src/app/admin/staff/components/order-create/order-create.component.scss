@@ -1,7 +1,7 @@
 .order-card {
   max-width: 600px;
-  margin: 20px auto;
-  padding: 16px;
+  margin: 10px auto;
+  padding: 10px;
 }
 
 mat-card-header {
@@ -27,8 +27,8 @@ mat-form-field {
 .new-item-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 16px;
+  // gap: 16px;
+  // margin-top: 16px;
 }
 
 .items-card {

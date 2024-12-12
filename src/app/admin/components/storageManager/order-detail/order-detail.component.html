@@ -32,11 +32,11 @@
           <div style="display: flex; justify-content: space-between; width: 100%;">
             <div style="flex: 1;">
               <span matListItemTitle>Fecha de entrega:</span>
-              <span matListItemLine>{{ order.calendar.delivered_date | date}}</span>
+              <span matListItemLine>{{ order.calendar?.delivered_date | date}}</span>
             </div>
             <div style="flex: 1;">
               <span matListItemTitle>Hora de entrega:</span>
-              <span matListItemLine>{{ order.calendar.start_time }} - {{ order.calendar.end_time }}</span>
+              <span matListItemLine>{{ order.calendar?.start_time }} - {{ order.calendar?.end_time }}</span>
             </div>
           </div>
         </mat-card-header>

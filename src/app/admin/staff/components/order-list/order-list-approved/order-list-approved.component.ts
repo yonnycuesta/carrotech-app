@@ -16,6 +16,7 @@ import { ProgressComponent } from '../../../../helpers/progress/progress.compone
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { AuthService } from '../../../../../home/services/auth/auth.service';
 import { OrderStaffService } from '../../../../services/order-staff.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-list-approved',
@@ -78,10 +79,22 @@ export class OrderListApprovedComponent implements OnInit {
         error: (err) => {
           console.log(err);
           this.isLoading = false;
+          Swal.fire({
+            title: 'Sin ordenes',
+            text: err.error.detail + ' aprobadas en este momento.',
+            icon: 'info',
+            confirmButtonText: "Entendido"
+          });
         }
       });
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al obtener las ordenes',
+        icon: 'error',
+        timer: 4000
+      });
     }
   }
 }

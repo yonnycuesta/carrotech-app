@@ -7,10 +7,10 @@ import { MatError, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NgToastModule, NgToastService, ToasterPosition } from 'ng-angular-popup';
-import { AuthService } from '../../services/auth/auth.service';
 import { Router, RouterModule } from '@angular/router';
-import { regExps } from '../../../admin/helpers/form-validator';
+import { logueB64, regExps } from '../../../admin/helpers/form-validator';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-register-view',
@@ -34,6 +34,7 @@ export class RegisterViewComponent implements OnInit {
 
   registroForm!: FormGroup;
   hide = true;
+  logue: any = logueB64.data;
 
   constructor(private fb: FormBuilder,
     private readonly sAuth: AuthService,

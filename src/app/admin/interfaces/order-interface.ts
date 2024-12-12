@@ -13,9 +13,11 @@ export interface IOrderItem {
 
 export interface IOrdercCreate {
   user_id: string;
-  storage_manager_id: string;
+  // storage_manager_id: string;
   comment: string | null;
-  delivered_opt: string;
+  zone: string | null;
+  delivered_opt: string | null;
+  // delivered_site: number;
   details: IItem[];
 }
 

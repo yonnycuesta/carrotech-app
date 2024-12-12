@@ -114,6 +114,6 @@ export class MaterialFormComponent implements OnInit {
     }
   }
   goBack(): void {
-    // window.history.back();
+    window.history.back();
   }
 }

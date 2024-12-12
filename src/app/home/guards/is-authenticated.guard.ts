@@ -10,8 +10,6 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const token = localStorage.getItem('token');
 
-  console.log(authService.authStatus());
-
 //  if (authService.authStatus() === AuthStatus.authenticated) {
 //     return true;
 //   }

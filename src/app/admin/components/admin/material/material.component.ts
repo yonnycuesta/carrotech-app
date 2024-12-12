@@ -43,8 +43,6 @@ const ELEMENT_DATA: IMaterial[] = [];
 })
 export class MaterialComponent implements OnInit, AfterViewInit {
 
-
-
   displayedColumns: string[] = [
     'code',
     'name',

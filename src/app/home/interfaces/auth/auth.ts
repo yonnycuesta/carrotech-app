@@ -12,8 +12,9 @@ export interface IRegister {
 export interface ILoginResponse {
   user: User;
   token: string;
+  // refreshToken: string;
 }
 
-export interface UserWithToken extends User {
-  token: string;
-}
+// export interface UserWithToken extends User {
+//   token: string;
+// }

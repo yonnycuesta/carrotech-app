@@ -76,7 +76,7 @@ export class OrderScheduleComponent implements OnInit, OnDestroy, AfterViewInit 
       item_id: [''],
       item_name: ['', Validators.required],
       qty_requested: ['', [Validators.required, Validators.min(1)]],
-      qty_delivered: ['', [Validators.required, Validators.min(1)]],
+      qty_delivered: ['', [Validators.required]],
       qty_pending: [0]
       // item_unit: ['und', Validators.required]
     });
@@ -118,10 +118,10 @@ export class OrderScheduleComponent implements OnInit, OnDestroy, AfterViewInit 
   // TODO:: Procesar
 
   approvedItem() {
-    if (this.itemForm.value.qty_delivered > this.itemForm.value.qty_requested) {
-      this.toast.danger('La cantidad aprobada no puede ser mayor a la cantidad solicitada', 'Error');
-      return;
-    }
+    // if (this.itemForm.value.qty_delivered > this.itemForm.value.qty_requested) {
+    //   this.toast.danger('La cantidad aprobada no puede ser mayor a la cantidad solicitada', 'Error');
+    //   return;
+    // }
 
     const qty_pending = this.itemForm.value.qty_requested - this.itemForm.value.qty_delivered;
     this.itemForm.patchValue({

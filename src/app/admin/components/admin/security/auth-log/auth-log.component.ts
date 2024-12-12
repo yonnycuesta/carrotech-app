@@ -13,6 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { IAuthLogs } from '../../../../interfaces/security.interface';
 import { SecurityService } from '../../../../services/security.service';
+import { ProgressComponent } from '../../../../helpers/progress/progress.component';
 
 const ELEMENT_DATA: IAuthLogs[] = [];
 
@@ -33,7 +34,8 @@ const ELEMENT_DATA: IAuthLogs[] = [];
     MatOptionModule,
     MatIconButton,
     MatTooltipModule,
-    RouterModule
+    RouterModule,
+    ProgressComponent
   ],
   templateUrl: './auth-log.component.html',
   styleUrl: './auth-log.component.scss'
@@ -48,6 +50,7 @@ export class AuthLogComponent implements OnInit, AfterViewInit {
     'ip_address',
     'created_at'
   ];
+  isLoading: boolean = true;
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
@@ -71,13 +74,16 @@ export class AuthLogComponent implements OnInit, AfterViewInit {
           this.dataSource.data = res;
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          this.isLoading = false;
         },
         error: (err) => {
           console.error(err);
+          this.isLoading = false;
         }
       });
     } catch (error) {
       console.error(error);
+      this.isLoading = false;
     }
   }
 

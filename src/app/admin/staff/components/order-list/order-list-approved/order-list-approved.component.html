@@ -40,26 +40,12 @@
         <mat-list>
           <div style="display: flex; justify-content: space-between; width: 100%;">
             <mat-list-item>
-              <span matListItemTitle>Carro Bodega (Nombre):</span>
+              <span matListItemTitle>Personal asignado:</span>
               <span matListItemLine>{{ order.manager_name }}</span>
             </mat-list-item>
             <mat-list-item>
-              <span matListItemTitle>Carro Bodega (Celular):</span>
+              <span matListItemTitle>Personal asignado (celular):</span>
               <span matListItemLine>{{ order.manager_phone }}</span>
-            </mat-list-item>
-            <mat-list-item>
-              <span matListItemTitle>Fecha de entrega:</span>
-              <span matListItemLine>{{ order.calendar.delivered_date | date }}</span>
-            </mat-list-item>
-          </div>
-          <div style="display: flex; justify-content: space-between; width: 100%;">
-            <mat-list-item>
-              <span matListItemTitle>Hora de entrega:</span>
-              <span matListItemLine>{{ order.calendar.start_time }} - {{ order.calendar.end_time }}</span>
-            </mat-list-item>
-            <mat-list-item>
-              <span matListItemTitle>Sitio de despacho:</span>
-              <span matListItemLine>{{ order.delivered_opt }}</span>
             </mat-list-item>
             <mat-list-item>
               <span matListItemTitle>Turno #:</span>
@@ -69,7 +55,7 @@
         </mat-list>
         <mat-list>
           <mat-list-item>
-            <span matListItemTitle>Comentario</span>
+            <span matListItemTitle>Comentarios</span>
             <span matListItemLine>{{ order.comment }}</span>
           </mat-list-item>
         </mat-list>

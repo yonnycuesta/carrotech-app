@@ -31,6 +31,31 @@ import { OrderListApprovedComponent } from './admin/staff/components/order-list/
 import { OrderListCompletedComponent } from './admin/staff/components/order-list/order-list-completed/order-list-completed.component';
 import { ApprovedComponent } from './admin/components/supervisor/approved/approved.component';
 import { RejectedComponent } from './admin/components/supervisor/rejected/rejected.component';
+import { StatusPageComponent } from './admin/components/admin/status-page/status-page.component';
+import { OrderPrecompletedComponent } from './admin/components/storageManager/order-precompleted/order-precompleted.component';
+import { OrderFormEditComponent } from './admin/components/admin/order-admin/order-form-edit/order-form-edit.component';
+import { OrderListPendingComponent } from './admin/staff/components/order-list/order-list-pending/order-list-pending.component';
+import { OrderListWopenendComponent } from './admin/components/warehouses/order-list-wopenend/order-list-wopenend.component';
+import { OrderListCwopenendComponent } from './admin/components/warehouses/cars/order-list-cwopenend/order-list-cwopenend.component';
+import { OrderListCwapprovedComponent } from './admin/components/warehouses/cars/order-list-cwapproved/order-list-cwapproved.component';
+import { OrderCarApprovedComponent } from './admin/components/warehouses/cars/order-car-approved/order-car-approved.component';
+import { OrderCarPreparedComponent } from './admin/components/warehouses/cars/order-car-prepared/order-car-prepared.component';
+import { OrderCardTransferedComponent } from './admin/components/warehouses/cars/order-card-transfered/order-card-transfered.component';
+import { OrderListReceivedComponent } from './admin/components/storageManager/receiveds/order-list-received/order-list-received.component';
+import { OrderDetailWarehouseComponent } from './admin/components/warehouses/order-detail-warehouse/order-detail-warehouse.component';
+import { OrderWarehouseApprovedComponent } from './admin/components/warehouses/order-warehouse-approved/order-warehouse-approved.component';
+import { OrderListWapprovedComponent } from './admin/components/warehouses/order-list-wapproved/order-list-wapproved.component';
+import { OrderListWpreparedComponent } from './admin/components/warehouses/order-list-wprepared/order-list-wprepared.component';
+import { OrderListWcompletedComponent } from './admin/components/warehouses/order-list-wcompleted/order-list-wcompleted.component';
+import { OrderBapprovedComponent } from './admin/components/warehouses/cars/boston/order-bapproved/order-bapproved.component';
+import { OrderBopenendComponent } from './admin/components/warehouses/cars/boston/order-bopenend/order-bopenend.component';
+import { OrderBpreparedComponent } from './admin/components/warehouses/cars/boston/order-bprepared/order-bprepared.component';
+import { OrderBtransferedComponent } from './admin/components/warehouses/cars/boston/order-btransfered/order-btransfered.component';
+import { OrderStaffOpenendComponent } from './admin/components/warehouses/staff/order-staff-openend/order-staff-openend.component';
+import { OrderStaffApprovedComponent } from './admin/components/warehouses/staff/order-staff-approved/order-staff-approved.component';
+import { OrderStaffPreparedComponent } from './admin/components/warehouses/staff/order-staff-prepared/order-staff-prepared.component';
+import { OrderStaffCompletedComponent } from './admin/components/warehouses/staff/order-staff-completed/order-staff-completed.component';
+import { OrderListPreparedComponent } from './admin/staff/components/order-list/order-list-prepared/order-list-prepared.component';
 
 
 export const routes: Routes = [
@@ -39,7 +64,6 @@ export const routes: Routes = [
     component: NavbarComponent,
     canActivate: [isAuthenticatedGuard],
     children: [
-
       {
         path: 'dashboard',
         component: DashboardComponent,
@@ -51,6 +75,10 @@ export const routes: Routes = [
       {
         path: 'usuarios',
         component: UserPageComponent,
+      },
+      {
+        path: 'ordenes_estados',
+        component: StatusPageComponent,
       },
       {
         path: 'chat',
@@ -80,10 +108,110 @@ export const routes: Routes = [
         path: 'order_manager/detail/:id',
         component: OrderDetailComponent,
       },
+
       {
         path: 'order_admin',
         component: OrderAdminComponent,
       },
+      {
+        path: 'order_admin/editar/:id',
+        component: OrderFormEditComponent,
+      },
+
+
+
+      // TODO:: BODEGA
+
+      {
+        path: 'ordenes_abiertas/bodega/:id',
+        component: OrderListWopenendComponent,
+      },
+      {
+        path: 'ordenes_aprobadas/bodega/:id',
+        component: OrderListWapprovedComponent,
+      },
+      {
+        path: 'ordenes_preparadas/bodega/:id',
+        component: OrderListWpreparedComponent,
+      },
+      {
+        path: 'ordenes_completadas/bodega/:id',
+        component: OrderListWcompletedComponent,
+      },
+      {
+        path: 'ordenes_bodega/detalle/:id',
+        component: OrderDetailWarehouseComponent,
+      },
+      {
+        path: 'ordenes_bodega/aprobar/:id',
+        component: OrderWarehouseApprovedComponent,
+      },
+
+
+
+
+
+
+
+
+      // TODO:: BODEGA - Carros
+      {
+        path: 'ordenes_abiertas/bodega-carros',
+        component: OrderListCwopenendComponent,
+      },
+      {
+        path: 'ordenes_aprobadas/bodega-carros',
+        component: OrderListCwapprovedComponent,
+      },
+      {
+        path: 'ordenes_preparadas/bodega-carros',
+        component: OrderCarPreparedComponent,
+      },
+      {
+        path: 'ordenes_transferidas/bodega-carros',
+        component: OrderCardTransferedComponent,
+      },
+      {
+        path: 'bodega_carros/aprobar/:id',
+        component: OrderCarApprovedComponent,
+      },
+      // TODO:: boston
+      {
+        path: 'ordenes_abiertas/bodega-boston',
+        component: OrderBopenendComponent,
+      },
+      {
+        path: 'ordenes_aprobadas/bodega-boston',
+        component: OrderBapprovedComponent,
+      },
+      {
+        path: 'ordenes_preparadas/bodega-boston',
+        component: OrderBpreparedComponent,
+      },
+      {
+        path: 'ordenes_transferidas/bodega-boston',
+        component: OrderBtransferedComponent,
+      },
+      // TODO:: PERSONAL BODEGA
+      {
+        path: 'ordenes_abiertas/bodega-personal/:id',
+        component: OrderStaffOpenendComponent,
+      },
+      {
+        path: 'ordenes_aprobadas/bodega-personal/:id',
+        component: OrderStaffApprovedComponent,
+      },
+      {
+        path: 'ordenes_preparadas/bodega-personal/:id',
+        component: OrderStaffPreparedComponent,
+      },
+      {
+        path: 'ordenes_transferidas/bodega-personal/:id',
+        component: OrderStaffCompletedComponent,
+      },
+
+      // TODO:: FIN BODEGA
+
       {
         path: 'ordenes_abiertas/:id',
         component: OrderOpenendComponent,
@@ -93,12 +221,29 @@ export const routes: Routes = [
         component: OrderApprovedComponent,
       },
       {
+        path: 'ordenes_pre-completadas/:id',
+        component: OrderPrecompletedComponent,
+      },
+      {
         path: 'ordenes_completadas/:id',
         component: OrderCompletedComponent,
       },
       {
+        path: 'ordenes_recibidas/:id',
+        component: OrderListReceivedComponent,
+      },
+      // TODO: Técnico
+      {
         path: 'ordenes_abiertas/staff/:id',
         component: OrderListOpenendComponent,
+      },
+      {
+        path: 'ordenes_abiertas/staff/:id',
+        component: OrderListOpenendComponent,
+      },
+      {
+        path: 'ordenes_por_aprobar/staff/:id',
+        component: OrderListPendingComponent,
       },
       {
         path: 'ordenes_aprobadas/staff/:id',
@@ -108,6 +253,12 @@ export const routes: Routes = [
         path: 'ordenes_completadas/staff/:id',
         component: OrderListCompletedComponent,
       },
+      {
+        path: 'ordenes_preparadas/staff/:id',
+        component: OrderListPreparedComponent,
+      },
+
+
       {
         path: 'ordenes_por_aprobar',
         component: ApprovedComponent,
