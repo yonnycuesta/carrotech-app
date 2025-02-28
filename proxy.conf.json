@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "https://carrotech-api.eiasa.com.co",
+    "target": "https://carrotechtest-api.eiasa.com.co",
     "secure": false,
     "pathRewrite": {
       "^/api": ""

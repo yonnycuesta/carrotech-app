@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "server": "node backend/server.js"
   },
   "private": true,
   "dependencies": {
@@ -29,7 +30,10 @@
     "@fullcalendar/list": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
     "@types/pdfmake": "^0.2.9",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
     "filesaver": "^0.0.13",
+    "jwt-decode": "^4.0.0",
     "ng-angular-popup": "^0.6.2",
     "ngx-filesaver": "^18.0.0",
     "ngx-mat-timepicker": "^18.0.0",

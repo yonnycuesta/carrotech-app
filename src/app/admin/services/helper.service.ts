@@ -1,16 +1,18 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { FileSaverService } from 'ngx-filesaver';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
+import { AvailabilityService } from './availability.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
   private readonly url: string = environment.apiURL;
+  private readonly sAvailable = inject(AvailabilityService);
 
   dateNow = new Date().toLocaleDateString('es-ES', {
     year: 'numeric',
@@ -68,5 +70,42 @@ export class HelperService {
       map((res: any) => res.data)
     );
   }
+
+  checkAvailability(): Observable<boolean> {
+    return this.sAvailable.getAvailability().pipe(
+      map((resp) => {
+        if (!resp) {
+          return false;
+        }
+
+        const availability = resp;
+        const startDate = new Date(availability.start_date);
+        const endDate = new Date(availability.end_date);
+        const now = new Date();
+
+        if (now < startDate || now > endDate) {
+          return false;
+        }
+
+        const dailyStartHour = availability.daily_start_hour;
+        const dailyStartMinute = availability.daily_start_minute;
+        const dailyEndHour = availability.daily_end_hour;
+        const dailyEndMinute = availability.daily_end_minute;
+
+        const todayStartTime = new Date();
+        todayStartTime.setHours(dailyStartHour, dailyStartMinute, 0, 0);
+
+        const todayEndTime = new Date();
+        todayEndTime.setHours(dailyEndHour, dailyEndMinute, 0, 0);
+
+        return now >= todayStartTime && now <= todayEndTime;
+      }),
+      catchError((error) => {
+        console.error('Error al obtener la disponibilidad: ', error);
+        return of(false);
+      })
+    );
+  }
+
 
 }

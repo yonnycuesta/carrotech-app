@@ -40,10 +40,6 @@
           <mat-icon matListItemIcon>check_circle</mat-icon>
           <span matListItemTitle>Completadas</span>
         </a>
-        <!-- <a mat-list-item routerLink="/ordenes_completadas/staff/{{user()?.id}}">
-            <mat-icon matListItemIcon>cancell</mat-icon>
-            <span matListItemTitle>Canceladas</span>
-          </a> -->
       </mat-nav-list>
       <!-- </mat-expansion-panel> -->
 
@@ -209,6 +205,10 @@
         <a mat-list-item [routerLink]="['/materiales']">
           <mat-icon matListItemIcon>inventory_2</mat-icon>
           <span matListItemTitle>Materiales</span>
+        </a>
+        <a mat-list-item [routerLink]="['/configurar-disponibilidad']">
+          <mat-icon matListItemIcon>event_available</mat-icon>
+          <span matListItemTitle>Disponibilidad</span>
         </a>
         <a mat-list-item [routerLink]="['/auth_logs']">
           <mat-icon matListItemIcon>login</mat-icon>

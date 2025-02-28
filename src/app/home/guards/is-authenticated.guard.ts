@@ -10,21 +10,28 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const token = localStorage.getItem('token');
 
-//  if (authService.authStatus() === AuthStatus.authenticated) {
-//     return true;
-//   }
-//   if (authService.authStatus() === AuthStatus.checking) {
-//     return false;
-//   }
+  //  if (authService.authStatus() === AuthStatus.authenticated) {
+  //     return true;
+  //   }
+  //   if (authService.authStatus() === AuthStatus.checking) {
+  //     return false;
+  //   }
 
-if (token) {
-  return true;
-}
+  if (authService.isAuthenticated()) {
+    return true;
+  }
 
-  const url = state.url;
-  localStorage.setItem('url', url);
-  router.navigateByUrl('/login');
+  router.navigate(['/login']);
   return false;
+
+  // if (token) {
+  //   return true;
+  // }
+
+  // const url = state.url;
+  // localStorage.setItem('url', url);
+  // router.navigateByUrl('/login');
+  // return false;
 };
 
 

@@ -1,9 +1,11 @@
-import { computed, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { computed, inject, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { AuthStatus, ICheckTokenResponse, ILoginResponse, User } from '../../interfaces/auth';
-import { BehaviorSubject, catchError, map, Observable, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, interval, map, Observable, of, Subscription, tap, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
+import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,13 +20,15 @@ export class AuthService {
   public authStatus = computed(() => this._authStatus());
   public authRole = computed(() => this._authRole());
 
+  private tokenCheckSubscription: Subscription | null = null;
+  private router = inject(Router);
 
   constructor(
     private _http: HttpClient
   ) {
 
     // this.checkAuthStatus().subscribe();
-
+    this.startTokenCheck();
   }
 
   register(data: any) {
@@ -68,7 +72,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this._currentUser.set(null);
-    // this._authStatus.set(AuthStatus.notAuthenticated);
+    this.router.navigate(['/login']);
   }
 
   getRole(): string | undefined {
@@ -80,6 +84,49 @@ export class AuthService {
   }
   passworRecovery(data: any) {
     return this._http.post(`${this.url}users/password-recovery`, data);
+  }
+
+
+  // Verificar si el token está expirado
+  isTokenExpired(token: string): boolean {
+    try {
+      const decoded: any = jwtDecode(token);
+      const currentTime = Math.floor(Date.now() / 1000);
+      return decoded.exp < currentTime;
+    } catch (error) {
+      return true;
+    }
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  // Verificar si el usuario está autenticado
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    if (!token || this.isTokenExpired(token)) {
+      this.logout();
+      return false;
+    }
+    return true;
+  }
+
+  // Iniciar la verificación periódica del token
+  private startTokenCheck(): void {
+    this.tokenCheckSubscription = interval(5000).subscribe(() => {
+      const token = this.getToken();
+      if (token && this.isTokenExpired(token)) {
+        this.logout();
+      }
+    });
+  }
+
+  // Limpiar el intervalo cuando el servicio se destruya
+  ngOnDestroy(): void {
+    if (this.tokenCheckSubscription) {
+      this.tokenCheckSubscription.unsubscribe();
+    }
   }
 
 }

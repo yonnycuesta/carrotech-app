@@ -1,0 +1,65 @@
+<mat-card>
+  <div class="container">
+    <h2>Configurar Disponibilidad Diaria</h2>
+
+    <!-- Rango de fechas -->
+    <div class="date-range">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de inicio</mat-label>
+        <input matInput [matDatepicker]="pickerStart" [formControl]="startDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de fin</mat-label>
+        <input matInput [matDatepicker]="pickerEnd" [formControl]="endDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <!-- Horario diario -->
+    <div>
+      <h3>Horario Disponible Cada Día</h3>
+      <div class="date-range">
+        <mat-form-field appearance="outline">
+          <mat-label>Hora inicio</mat-label>
+          <mat-select [formControl]="dailyStartHour">
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}h</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Minuto inicio</mat-label>
+          <mat-select [formControl]="dailyStartMinute">
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}m</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <div class="date-range">
+        <mat-form-field appearance="outline">
+          <mat-label>Hora fin</mat-label>
+          <mat-select [formControl]="dailyEndHour">
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}h</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Minuto fin</mat-label>
+          <mat-select [formControl]="dailyEndMinute">
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}m</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="saveAvailability()">
+      Guardar Disponibilidad Diaria
+    </button>
+    <p *ngIf="!isAvailable" class="warning">
+      Actualmente fuera del horario disponible.
+    </p>
+  </div>
+</mat-card>

@@ -36,7 +36,6 @@ import { logueB64 } from '../../helpers/form-validator';
     MatMenuModule,
     MatBadgeModule,
     MatFormFieldModule,
-    ChatSupportComponent,
     MatExpansionModule
   ],
   templateUrl: './navbar.component.html',

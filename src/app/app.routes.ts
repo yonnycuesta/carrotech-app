@@ -56,6 +56,7 @@ import { OrderStaffApprovedComponent } from './admin/components/warehouses/staff
 import { OrderStaffPreparedComponent } from './admin/components/warehouses/staff/order-staff-prepared/order-staff-prepared.component';
 import { OrderStaffCompletedComponent } from './admin/components/warehouses/staff/order-staff-completed/order-staff-completed.component';
 import { OrderListPreparedComponent } from './admin/staff/components/order-list/order-list-prepared/order-list-prepared.component';
+import { AvailableConfigComponent } from './admin/components/admin/available-config/available-config.component';
 
 
 export const routes: Routes = [
@@ -67,57 +68,73 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_programadas',
         component: DashboardCalendarComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'usuarios',
         component: UserPageComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_estados',
         component: StatusPageComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'chat',
-        component: ChatPageComponent
+        component: ChatPageComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'perfil/:id',
         component: UserProfileComponent,
+        canActivate: [isAuthenticatedGuard],
+
       },
       {
         path: 'order_create',
         component: OrderCreateComponent,
+        canActivate: [isAuthenticatedGuard],
+
       },
       {
         path: 'order_staff',
         component: OrderListComponent,
+        canActivate: [isAuthenticatedGuard],
+
       },
       {
         path: 'order_items_add/:norder/:id',
         component: OrderItemFormComponent,
+        canActivate: [isAuthenticatedGuard],
+
       },
       {
         path: 'order_manager',
         component: OrderPageComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'order_manager/detail/:id',
         component: OrderDetailComponent,
+        canActivate: [isAuthenticatedGuard],
       },
 
       {
         path: 'order_admin',
         component: OrderAdminComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'order_admin/editar/:id',
         component: OrderFormEditComponent,
+        canActivate: [isAuthenticatedGuard],
       },
-
 
 
       // TODO:: BODEGA
@@ -125,89 +142,101 @@ export const routes: Routes = [
       {
         path: 'ordenes_abiertas/bodega/:id',
         component: OrderListWopenendComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_aprobadas/bodega/:id',
         component: OrderListWapprovedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_preparadas/bodega/:id',
         component: OrderListWpreparedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_completadas/bodega/:id',
         component: OrderListWcompletedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_bodega/detalle/:id',
         component: OrderDetailWarehouseComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_bodega/aprobar/:id',
         component: OrderWarehouseApprovedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
-
-
-
-
-
-
-
 
       // TODO:: BODEGA - Carros
       {
         path: 'ordenes_abiertas/bodega-carros',
         component: OrderListCwopenendComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_aprobadas/bodega-carros',
         component: OrderListCwapprovedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_preparadas/bodega-carros',
         component: OrderCarPreparedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_transferidas/bodega-carros',
         component: OrderCardTransferedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'bodega_carros/aprobar/:id',
         component: OrderCarApprovedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       // TODO:: boston
       {
         path: 'ordenes_abiertas/bodega-boston',
         component: OrderBopenendComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_aprobadas/bodega-boston',
         component: OrderBapprovedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_preparadas/bodega-boston',
         component: OrderBpreparedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_transferidas/bodega-boston',
         component: OrderBtransferedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       // TODO:: PERSONAL BODEGA
       {
         path: 'ordenes_abiertas/bodega-personal/:id',
         component: OrderStaffOpenendComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_aprobadas/bodega-personal/:id',
         component: OrderStaffApprovedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_preparadas/bodega-personal/:id',
         component: OrderStaffPreparedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_transferidas/bodega-personal/:id',
         component: OrderStaffCompletedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
 
       // TODO:: FIN BODEGA
@@ -215,93 +244,120 @@ export const routes: Routes = [
       {
         path: 'ordenes_abiertas/:id',
         component: OrderOpenendComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_aprobadas/:id',
         component: OrderApprovedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_pre-completadas/:id',
         component: OrderPrecompletedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_completadas/:id',
         component: OrderCompletedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_recibidas/:id',
         component: OrderListReceivedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       // TODO: Técnico
       {
         path: 'ordenes_abiertas/staff/:id',
         component: OrderListOpenendComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_abiertas/staff/:id',
         component: OrderListOpenendComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_por_aprobar/staff/:id',
         component: OrderListPendingComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_aprobadas/staff/:id',
         component: OrderListApprovedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_completadas/staff/:id',
         component: OrderListCompletedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_preparadas/staff/:id',
         component: OrderListPreparedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
 
 
       {
         path: 'ordenes_por_aprobar',
         component: ApprovedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'ordenes_rechazadas',
         component: RejectedComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'order_schedule/:id',
         component: OrderScheduleComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'carros',
         component: CarPageComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'carro_agregar',
         component: CarFormComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'carro_editar/:id',
         component: CarFormComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'auth_logs',
         component: AuthLogComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'notificaciones',
         component: NotificationListComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'materiales',
         component: MaterialComponent,
+        canActivate: [isAuthenticatedGuard],
+      },
+      {
+        path: 'configurar-disponibilidad',
+        component: AvailableConfigComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'material_agregar',
         component: MaterialFormComponent,
+        canActivate: [isAuthenticatedGuard],
       },
       {
         path: 'material_editar/:id',
         component: MaterialFormComponent,
+        canActivate: [isAuthenticatedGuard],
       },
     ],
   },

@@ -1,4 +1,7 @@
 <mat-card class="order-card">
+  <p *ngIf="!isAvailable" class="warning">
+    IMPORTANTE: No se pueden crear órdenes en este momento. Consulte la disponibilidad con su SUPERVISOR.
+  </p>
   <mat-card-header>
     <mat-card-title>
       <button mat-icon-button (click)="goBack()">
@@ -15,6 +18,7 @@
       <mat-select [(ngModel)]="zone" name="zone">
         <mat-option value="Occidente">Occidente</mat-option>
         <mat-option value="Oriente">Oriente</mat-option>
+        <mat-option value="Almacén">Almacén/Bodega</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -69,7 +73,7 @@
     <button mat-stroked-button color="warn" (click)="cancel()" type="button">
       <mat-icon>cancell</mat-icon>
       Cancelar</button>
-    <button mat-raised-button color="primary" type="button" (click)="saveItems()">
+    <button mat-raised-button color="primary" type="button" (click)="saveItems()" [disabled]="!isAvailable">
       <mat-icon>save</mat-icon>
       Crear Orden
     </button>

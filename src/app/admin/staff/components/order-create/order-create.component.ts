@@ -21,6 +21,8 @@ import { MaterialService } from '../../../services/material.service';
 import { MatList, MatListItem, MatListModule, MatListOption } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDatepicker, MatDatepickerModule, MatDateRangePicker } from '@angular/material/datepicker';
+import { HelperService } from '../../../services/helper.service';
 @Component({
   selector: 'app-order-create',
   standalone: true,
@@ -40,7 +42,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatListModule,
     MatExpansionModule,
     RouterModule,
-    MatIcon
+    MatIcon,
+    MatDatepickerModule
   ],
   templateUrl: './order-create.component.html',
   styleUrl: './order-create.component.scss'
@@ -48,6 +51,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class OrderCreateComponent implements OnInit, OnDestroy {
 
   private _snackBar = inject(MatSnackBar);
+  private hService = inject(HelperService);
 
   durationInSeconds = 5;
 
@@ -71,6 +75,9 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
 
   delivered_site = 1;
   warehouses: any;
+
+
+  isAvailable: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -103,6 +110,10 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
       startWith(''),
       switchMap(value => this._filter(value || ''))
     );
+
+    this.hService.checkAvailability().subscribe((isAvailable) => {
+      this.isAvailable = isAvailable;
+    });
 
 
   }
@@ -186,6 +197,11 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
 
   saveItems() {
 
+    if (this.zone == '' || this.zone == null) {
+      this.showSnackBar('Seleccione una zona');
+      return;
+    }
+
     if (this.itemsSubject.value.length <= 0) {
       this.showSnackBar('No hay componentes para guardar');
       return;
@@ -246,7 +262,7 @@ export class OrderCreateComponent implements OnInit, OnDestroy {
             });
           }
         });
-      }else{
+      } else {
         Swal.fire({
           title: 'Cancelado',
           text: 'No se ha creado la orden',

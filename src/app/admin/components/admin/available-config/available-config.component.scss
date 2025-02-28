@@ -1,0 +1,32 @@
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
+
+.date-time-picker {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.date-range{
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.warning {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
